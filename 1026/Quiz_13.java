@@ -11,7 +11,7 @@ public class Quiz_13 {
 			}else if(a==3 || a==6 || a==9){
 				System.out.println(i+"박수 짝");
 			}else if(b==3 || b==6 || b==9) {
-				System.out.println(i+"박수 ");
+				System.out.println(i+"박수 짝");
 			}	
 		}
 	}
