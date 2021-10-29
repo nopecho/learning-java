@@ -28,5 +28,4 @@ public class Quiz_12 {
 			
 		}sc.close();
 	}
-
 }
