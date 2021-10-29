@@ -10,20 +10,20 @@ public class Quiz_12 {
 			char[] q = words[i].toCharArray();
 			
 				for(int j=0;j<q.length;j++) {	
-				int random = (int)(Math.random()*q.length);
 				char temp2;
+				int random = (int)(Math.random()*q.length);
 				temp2=q[i];
 				q[i]=q[random];
 				q[random]=temp2;
 			}
 				
-			System.out.printf("Q%d. %sÀÇ Á¤´äÀ» ÀÔ·ÂÇÏ¼¼¿ä.>>",i+1,new String (q));
+			System.out.printf("Q%d. %sì˜ ì •ë‹µì„ ìž…ë ¥í•˜ì„¸ìš”.>>",i+1,new String (q));
 			String a=sc.nextLine();
 			
 			if(words[i].equals(a.trim())) {
-				System.out.printf("¸Â¾Ò½À´Ï´ç.%n%n");
+				System.out.printf("ë§žì•˜ìŠµë‹ˆë‹¹.%n%n");
 			}else {
-				System.out.printf("Æ²·È½À´Ï´ç.%n%n");
+				System.out.printf("í‹€ë ¸ìŠµë‹ˆë‹¹.%n%n");
 			}
 			
 		}sc.close();
