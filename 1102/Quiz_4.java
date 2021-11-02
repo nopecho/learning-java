@@ -11,10 +11,10 @@ class R{
 		return w*h;
 	}
 	void show() {
-		System.out.println("("+x+","+y+")¿¡¼­ Å©±â°¡ "+w+"x"+y+"ÀÎ »ç°¢Çü");
+		System.out.println("("+x+","+y+")ì—ì„œ í¬ê¸°ê°€ "+w+"x"+y+"ì¸ ì‚¬ê°í˜•");
 	}
 	boolean contains(R a) {
-		if(a.square()>this.square()) {
+		if((this.x<a.x) && (this.y<a.y) && (this.x+this.w)<(a.x+a.w) && (this.y+this.h)<(a.y+a.h)) {
 			return true;
 		}else {
 			return false;
@@ -28,12 +28,12 @@ public class Quiz_4 {
 		R t = new R(1,1,10,10);
 		
 		r.show();
-		System.out.println("sÀÇ ¸éÀûÀº "+s.square());
+		System.out.println("sì˜ ë©´ì ì€ "+s.square());
 		if(t.contains(r)) {
-			System.out.println("t´Â rÀ» Æ÷ÇÔÇÕ´Ï´Ù.");
+			System.out.println("tëŠ” rì„ í¬í•¨í•©ë‹ˆë‹¤.");
 		}
 		if(t.contains(s)) {
-			System.out.println("t´Â s¸¦ Æ÷ÇÔÇÕ´Ï´Ù.");
+			System.out.println("tëŠ” së¥¼ í¬í•¨í•©ë‹ˆë‹¤.");
 		}
 	}
 
