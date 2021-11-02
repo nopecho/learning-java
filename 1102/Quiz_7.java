@@ -5,8 +5,8 @@ class Day{
 	public void set(String work) {this.work=work;}
 	public String get() {return work;}
 	public void show() {
-		if(work == null) System.out.println("¾ø½À´Ï´Ù.");
-		else System.out.println(work+" ÀÔ´Ï´Ù.");
+		if(work == null) System.out.println("ì—†ìŠµë‹ˆë‹¤.");
+		else System.out.println(work+" ì…ë‹ˆë‹¤.");
 	}
 }
 
@@ -24,49 +24,49 @@ class MonthS{
 	}
 	
 	private void input() {
-		System.out.print("³¯Â¥(1~"+this.day+") ? >>");
+		System.out.print("ë‚ ì§œ(1~"+this.day+")  : ");
 		int dayNum=sc.nextInt();
 		if(1<=dayNum && dayNum<=this.day) {
-			System.out.print("ÇÒÀÏ(ºóÄ­¾øÀÌ ÀÔ·Â) >>");
+			System.out.print("í• ì¼(ë¹ˆì¹¸ì—†ì´ ì…ë ¥) : ");
 			String work = sc.next();
 			d[dayNum-1].set(work);
 		}else {
-			System.out.println("³¯Â¥¸¦ È®ÀÎÇØÁÖ¼¼¿ë");
+			System.out.println("ë‚ ì§œë¥¼ í™•ì¸í•´ì£¼ì„¸ìš©");
 		}
 
 	}
 	
 	private void view() {
-		System.out.print("³¯Â¥(1~"+this.day+") ? >>");
+		System.out.print("ë‚ ì§œ(1~"+this.day+")  : ");
 		int dayNum=sc.nextInt();
 		if(1<=dayNum && dayNum<=this.day) {
 			d[dayNum-1].get();
-			System.out.print(dayNum+"ÀÏÀÇ ÇÒÀÏÀº ");
+			System.out.print(dayNum+"ì¼ì˜ í• ì¼ì€ ");
 			d[dayNum-1].show();
 		}else {
-			System.out.println("³¯Â¥¸¦ È®ÀÎÇØÁÖ¼¼¿ë");
+			System.out.println("ë‚ ì§œë¥¼ í™•ì¸í•´ì£¼ì„¸ìš©");
 		}
 
 	}
 	
 	private void finish() {
-		System.out.println("ÇÁ·Î±×·¥À» Á¾·áÇÕ´Ï´Ù.");
+		System.out.println("ìŠ¤ì¼€ì¥´ ê´€ë¦¬ í”„ë¡œê·¸ë¨ì„ ì¢…ë£Œí•©ë‹ˆë‹¤.");
 	}
 	
 	void run() {
-		System.out.println("ÀÌ¹ø´Ş ½ºÄÉÁì °ü¸® ÇÁ·Î±×·¥");
+		System.out.println("ì´ë²ˆë‹¬ ìŠ¤ì¼€ì¥´ ê´€ë¦¬ í”„ë¡œê·¸ë¨");
 		while(true) {
-			System.out.print("ÇÒÀÏ (ÀÔ·Â:1, º¸±â:2, ³¡³»±â:3) >>");
+			System.out.print("í• ì¼ (ì…ë ¥:1, ë³´ê¸°:2, ëë‚´ê¸°:3) : ");
 			int num = sc.nextInt();
 			if(num==1) {
 				input();
-				continue;
 			}else if(num==2){
 				view();
-				continue;
-			}else {
+			}else if(num==3) {
 				finish();
 				break;
+			}else {
+				System.out.println("1~3ì„ ì…ë ¥í•˜ì„¸ìš”.");
 			}
 		}
 	}
