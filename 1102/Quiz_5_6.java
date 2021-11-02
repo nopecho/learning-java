@@ -13,7 +13,7 @@ class Circle{
 		return this.radius;	
 	}
 	public void show() {
-		System.out.println("°¡Àå ¸éÀûÀÌ Å« ¿øÀº ("+x+","+y+") "+radius);
+		System.out.println("Â°Â¡Ã€Ã¥ Â¸Ã©Ã€Ã»Ã€ÃŒ Ã…Â« Â¿Ã¸Ã€Âº ("+x+","+y+") "+radius);
 	}
 }
 public class Quiz_5_6 {
@@ -34,6 +34,11 @@ public class Quiz_5_6 {
 				max=c[i].getRadius();				
 			}
 		}
+		for (int i=0;i<c.length;i++) {
+			if(c[i].getRadius()==max) {
+				c[i].show();
+			}
+		}		
 		
 		sc.close();
 	}
