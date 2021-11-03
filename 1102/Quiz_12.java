@@ -10,8 +10,8 @@ class Customer{
 	
 }
 class Seat{
-	private String seatClass;
-	private static int seatNo=10;
+	private String seatClass; //ì¢Œì„ êµ¬ë¶„
+	private static String[] seatNo=new String[10]; //ì¢Œì„ ë²ˆí˜¸
 	Seat(int no){
 		if(no==0) {
 			this.seatClass="S";
@@ -24,20 +24,19 @@ class Seat{
 	public void setNo() {
 		
 	}
-	public void getNo() {
+	public void seatNoShow() { //ì¢Œì„ ë³´ì—¬ì£¼ê¸°
 		System.out.print(this.seatClass+">>");
-		for (int i=0;i<seatNo;i++) {
-			System.out.print("--- ");
+		for (int i=0;i<seatNo.length;i++) {
+			seatNo[i]="--- ";
+			System.out.print(seatNo[i]);
 		}System.out.println();
-	}
-	public static void seatShow() {
-		System.out.print("ÁÂ¼®±¸ºĞ : S(1), A(2), B(3) >>");
 	}
 }
 class Reservation{
 	Scanner sc = new Scanner(System.in);
 	boolean f = true;
-	Seat[] seat = new Seat[3]; //seat[0]=S, seat[1]=A, seat[2]=B ÁÂ¼®±¸ºĞ
+	Seat[] seat = new Seat[3]; //seat[0]=S, seat[1]=A, seat[2]=B ì¢Œì„êµ¬ë¶„
+	Customer[] human;
 	
 	public Reservation(){
 		for (int i=0;i<seat.length;i++) {
@@ -46,31 +45,31 @@ class Reservation{
 	}
 	
 	public void input() {
-		System.out.println("-----------¿¹¾à ¸Ş´º-----------");
-		Seat.seatShow();
+		System.out.println("-----------ì˜ˆì•½ ë©”ë‰´-----------");
+		System.out.print("ì¢Œì„êµ¬ë¶„ : S(1), A(2), B(3) >>");
 		int chk=sc.nextInt();
-		seat[chk-1].getNo();
+		seat[chk-1].seatNoShow();
 	}
 	
 	public void view() {
-		System.out.println("-----------Á¶È¸ ¸Ş´º-----------");
-		Seat.seatShow();
+		System.out.println("-----------ì¡°íšŒ ë©”ë‰´-----------");
+		System.out.print("ì¢Œì„êµ¬ë¶„ : S(1), A(2), B(3) >>");
 		String chk=sc.next();
 	}
 	
 	public void reset() {
-		System.out.println("-----------Ãë¼Ò ¸Ş´º-----------");
+		System.out.println("-----------ì·¨ì†Œ ë©”ë‰´-----------");
 	}
 	
 	public boolean finish() {
-		System.out.println("<-<-< ¿¹¾à ½Ã½ºÅÛÀ» Á¾·áÇÕ´Ï´Ù. >->->");
+		System.out.println("<-<-< ì˜ˆì•½ ì‹œìŠ¤í…œì„ ì¢…ë£Œí•©ë‹ˆë‹¤. >->->");
 		return f=false;
 	}
 	
 	public void run() {
 		
 		while(f) {
-			System.out.print("¿¹¾à:1, Á¶È¸:2, Ãë¼Ò:3, ³¡³»±â:4 >> ");
+			System.out.print("ì˜ˆì•½:1, ì¡°íšŒ:2, ì·¨ì†Œ:3, ëë‚´ê¸°:4 >> ");
 			int num=sc.nextInt();
 			switch(num){
 			case 1:
@@ -82,7 +81,7 @@ class Reservation{
 			case 4:
 				finish(); break;
 			default:
-				System.out.println("1~4¸¦ ÀÔ·ÂÇÏ¼¼¿ä.");
+				System.out.println("1~4ë¥¼ ì…ë ¥í•˜ì„¸ìš”.");
 			}
 		}
 	}	
@@ -90,7 +89,7 @@ class Reservation{
 public class Quiz_12 {
 
 	public static void main(String[] args) {
-		System.out.println("<-<-<¸íÇ°ÄÜ¼­Æ®È¦ ¿¹¾à ½Ã½ºÅÛ ÀÔ´Ï´Ù.>->->");
+		System.out.println("<-<-<ëª…í’ˆì½˜ì„œíŠ¸í™€ ì˜ˆì•½ ì‹œìŠ¤í…œ ì…ë‹ˆë‹¤.>->->");
 		Reservation x = new Reservation();
 		x.run();
 	}
