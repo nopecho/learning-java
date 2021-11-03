@@ -27,20 +27,20 @@ class Seat{
 		if(this.seatNo[num-1].equals(" --- ")) {
 			this.seatNo[num-1]=" "+name+" ";	
 		}else{
-			System.out.println("해당 좌석은 이미 예약이 된 좌석입니다.");	
+			System.out.println("[!] 해당 좌석은 이미 예약이 된 좌석입니다.");	
 		}
 	}
 	
 	public void delSeatNo(String name) {
 		int count=0;
 		for(int i=0;i<seatNo.length;i++) {
-			if(name.equals(seatNo[i])){
+			if(seatNo[i].equals(" "+name+" ")){
 				this.seatNo[i]=" --- ";
 			}else {
 				count++;
 			}
 		}if(count==seatNo.length) {
-			System.out.println("해당 좌석은 이미 빈 좌석입니다.");
+			System.out.println("[!] 해당 예약자가 없습니다. 이름을 다시 확인하세요.");
 		}
 	}
 }
@@ -66,6 +66,10 @@ class Reservation{
 		String name=sc.next();
 		System.out.print("좌석 번호 >>");
 		int seatNo = sc.nextInt();
+		if(seatNo>10) {
+			System.out.println("[!] 좌석 번호는 1~10입니다.");
+			return;
+		}
 		seat[chk-1].setSeatNo(seatNo,name);
 	}
 	
@@ -74,7 +78,7 @@ class Reservation{
 		for (int i=0;i<seat.length;i++) {
 			seat[i].seatShow();
 		}
-		System.out.println("<<<조회를 완료 했습니다.>>>");
+		System.out.println("<<< 조회를 완료 했습니다. >>>");
 	}
 	
 	public void reset() {
@@ -88,19 +92,10 @@ class Reservation{
 	}
 	
 	public boolean finish() {
-		System.out.println("<-<-< 예약 시스템을 종료합니다. >->->");
+		System.out.println("<<< 예약 시스템을 종료합니다. >>>");
 		return f=false;
 	}
-	
-	public boolean noCheck(int seatNo) {
-		if(seatNo>10) {
-			System.out.println("좌석 번호는 1~10번 까지 입니다. 다시 입력하세요");
-			return true;
-		}else {
-			return f=false;
-		}
-	}
-	
+		
 	public void run() {
 		
 		while(f) {
@@ -124,7 +119,7 @@ class Reservation{
 public class Quiz_12 {
 
 	public static void main(String[] args) {
-		System.out.println("<-<-<명품콘서트홀 예약 시스템 입니다.>->->");
+		System.out.println("<<< 명품콘서트홀 예약 시스템 입니다. >>>");
 		Reservation x = new Reservation();
 		x.run();
 	}
