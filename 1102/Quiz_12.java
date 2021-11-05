@@ -4,12 +4,12 @@ class Seat{
 	private String seatClass; //좌석 구분
 	private String[] seatNo=new String[10]; //좌석 번호
 	Seat(int no){
-		switch (no){
-		case 0 :this.seatClass="S";break;
-		case 1 :this.seatClass="A";break;
-		case 2 :this.seatClass="B";break;
+		switch (no){ //Seat클래스의 좌석 구분 초기화
+		case 0 : this.seatClass="S"; break;
+		case 1 : this.seatClass="A"; break;
+		case 2 : this.seatClass="B"; break;
 		}
-		for (int i=0;i<seatNo.length;i++) {
+		for (int i=0;i<seatNo.length;i++) { //Seat클래스의 좌석 번호10개 --- 로 초기화
 			seatNo[i]=" --- ";
 		}
 	}
@@ -21,7 +21,7 @@ class Seat{
 		}System.out.println();
 	}
 	
-	public void setSeatNo(int num,String name) {
+	public void setSeatNo(int num,String name) { //좌석번호 세팅 메소드
 		if(this.seatNo[num-1].equals(" --- ")) {
 			this.seatNo[num-1]=" "+name+" ";	
 		}else{
@@ -29,7 +29,7 @@ class Seat{
 		}
 	}
 	
-	public void delSeatNo(String name) {
+	public void delSeatNo(String name) { //좌석번호 삭제 메소드
 		int count=0;
 		for(int i=0;i<seatNo.length;i++) {
 			if(seatNo[i].equals(" "+name+" ")){
@@ -47,15 +47,15 @@ class Seat{
 class Reservation{
 	Scanner sc = new Scanner(System.in);
 	boolean f = true;	
-	Seat[] seat = new Seat[3]; //seat[0]=S, seat[1]=A, seat[2]=B 좌석구분
+	Seat[] seat = new Seat[3]; //S,A,B 좌석 3개를 각각 레퍼런스할 수 있는 Seat객체배열 
 	
 	public Reservation(){
 		for (int i=0;i<seat.length;i++) {
-			seat[i]=new Seat(i);
+			seat[i]=new Seat(i); //seat[0]=S, seat[1]=A, seat[2]=B 좌석구분
 		}
 	}
 	
-	public void input() {
+	public void input() { //좌석 예약 메소드
 		System.out.println("<예약 메뉴>");
 		System.out.print("[좌석] S:1, A:2, B:3 >>");
 		int chk=sc.nextInt();
@@ -71,7 +71,7 @@ class Reservation{
 		seat[chk-1].setSeatNo(seatNo,name);
 	}
 	
-	public void view() {
+	public void view() { //전체 좌석 조회 메소드
 		System.out.println("<조회 메뉴>");
 		for (int i=0;i<seat.length;i++) {
 			seat[i].seatShow();
@@ -79,7 +79,7 @@ class Reservation{
 		System.out.println("<<< 조회를 완료 했습니다. >>>");
 	}
 	
-	public void reset() {
+	public void reset() { //예약 좌석 취소 메소드
 		System.out.println("<취소 메뉴>");
 		System.out.print("[좌석] S:1, A:2, B:3 >>");
 		int chk=sc.nextInt();
@@ -89,7 +89,7 @@ class Reservation{
 		seat[chk-1].delSeatNo(name);
 	}
 	
-	public boolean finish() {
+	public boolean finish() { //예약 종료 메소드
 		System.out.println("<<< 예약 시스템을 종료합니다. >>>");
 		return f=false;
 	}
@@ -100,16 +100,11 @@ class Reservation{
 			System.out.print("예약:1, 조회:2, 취소:3, 끝내기:4 >> ");
 			int num=sc.nextInt();
 			switch(num){
-			case 1:
-				input(); break;
-			case 2:
-				view(); break;
-			case 3:
-				reset(); break;
-			case 4:
-				finish(); break;
-			default:
-				System.out.println("1~4를 입력하세요.");
+			case 1: input(); break;	
+			case 2: view(); break;		
+			case 3: reset(); break;			
+			case 4: finish(); break;			
+			default: System.out.println("1~4를 입력하세요.");				
 			}
 		}
 	}	
