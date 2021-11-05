@@ -23,10 +23,9 @@ class Seat{
 	
 	public void setSeatNo(int num,String name) { //좌석번호 세팅 메소드
 		if(this.seatNo[num-1].equals(" --- ")) {
-			this.seatNo[num-1]=" "+name+" ";	
-		}else{
-			System.out.println("[!] 해당 좌석은 이미 예약이 된 좌석입니다.");	
-		}
+			this.seatNo[num-1]=" "+name+" ";
+			return;
+		}System.out.println("[!] 해당 좌석은 이미 예약이 된 좌석입니다.");	
 	}
 	
 	public void delSeatNo(String name) { //좌석번호 삭제 메소드
@@ -34,9 +33,8 @@ class Seat{
 		for(int i=0;i<seatNo.length;i++) {
 			if(seatNo[i].equals(" "+name+" ")){
 				this.seatNo[i]=" --- ";
-			}else {
-				count++;
-			}
+				return;
+			}count++;
 		}if(count==seatNo.length) {
 			System.out.println("[!] 해당 예약자가 없습니다. 이름을 다시 확인하세요.");
 		}
