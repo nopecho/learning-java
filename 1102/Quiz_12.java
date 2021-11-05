@@ -4,12 +4,10 @@ class Seat{
 	private String seatClass; //좌석 구분
 	private String[] seatNo=new String[10]; //좌석 번호
 	Seat(int no){
-		if(no==0) {
-			this.seatClass="S";
-		}else if(no==1) {
-			this.seatClass="A";
-		}else if(no==2) {
-			this.seatClass="B";
+		switch (no){
+		case 0 :this.seatClass="S";break;
+		case 1 :this.seatClass="A";break;
+		case 2 :this.seatClass="B";break;
 		}
 		for (int i=0;i<seatNo.length;i++) {
 			seatNo[i]=" --- ";
