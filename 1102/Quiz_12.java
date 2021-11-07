@@ -54,8 +54,7 @@ class Reservation{
 	}
 	
 	public void input() { //좌석 예약 메소드
-		System.out.println("<예약 메뉴>");
-		System.out.print("[좌석] S:1, A:2, B:3 >>");
+		System.out.print("<예약메뉴>\n[좌석] S:1, A:2, B:3 >>");
 		int chk=sc.nextInt();
 		seat[chk-1].seatShow();
 		System.out.print("이름 >>");
@@ -78,8 +77,7 @@ class Reservation{
 	}
 	
 	public void reset() { //예약 좌석 취소 메소드
-		System.out.println("<취소 메뉴>");
-		System.out.print("[좌석] S:1, A:2, B:3 >>");
+		System.out.print("<취소 메뉴>\n[좌석] S:1, A:2, B:3 >>");
 		int chk=sc.nextInt();
 		seat[chk-1].seatShow();
 		System.out.print("이름 >>");
