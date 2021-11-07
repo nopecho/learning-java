@@ -90,8 +90,7 @@ class Reservation{
 		return f=false;
 	}
 		
-	public void run() {
-		
+	public void run() {	
 		while(f) {
 			System.out.print("예약:1, 조회:2, 취소:3, 끝내기:4 >> ");
 			int num=sc.nextInt();
