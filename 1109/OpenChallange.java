@@ -9,12 +9,10 @@ abstract class GameObject { //추상 클래스
 		this.y=startY;
 		this.distance=distance;
 	}
-	public int getX(){
-		return x;
-	}
-	public int getY() {
-		return y;
-	}
+	public int getX(){ return x; } 
+
+	public int getY() { return y; }
+			
 	public boolean collide(GameObject p) { //이 객체가 객체p와 충돌했으면 true;
 		if(this.x==p.getX() && this.y==p.getY()) {
 			return true;
@@ -31,30 +29,24 @@ class Fish extends GameObject{
 	public Fish(int startX,int startY, int distance){
 		super(startX,startY,distance);
 	}
-
 	@Override
 	protected void move() {
 		int rand = (int)(Math.random()*4);
 		switch(rand) {
 		case 0:
-			if(y==0) {
-				return;
-			} y--; break;				
+			if(y==0) return;
+			y--; break;				
 		case 1:
-			if(x==9) {
-				return;
-			} x++; break;						
+			if(x==9) return;
+			x++; break;						
 		case 2:
-			if(x==0) {
-				return;
-			} x--; break;		
+			if(x==0) return;
+			x--; break;		
 		case 3:
-			if(y==19) {
-				return;
-			} y++; break;				
+			if(y==19) return;
+			y++; break;				
 		}
-	}
-	
+	}	
 	@Override
 	protected char getShape() {	return '@'; }
 }
@@ -73,22 +65,22 @@ class Bear extends GameObject{
 		switch(move) {
 		case "a":
 			if(y==0) {
-				System.out.println("[!] 왼쪽으로 움직일 수 없습니다.");
+				System.out.println("[!] 왼쪽으로 더 이상 움직일 수 없습니다.");
 				return;
 			} y--; break;				
 		case "s":
 			if(x==9) {
-				System.out.println("[!] 아래쪽으로 움직일 수 없습니다.");
+				System.out.println("[!] 아래쪽으로 더 이상 움직일 수 없습니다.");
 				return;
 			} x++; break;						
 		case "d":
 			if(x==0) {
-				System.out.println("[!] 위쪽으로 움직일 수 없습니다.");
+				System.out.println("[!] 위쪽으로 더 이상 움직일 수 없습니다.");
 				return;
 			} x--; break;		
 		case "f":
 			if(y==19) {
-				System.out.println("[!] 오른쪽으로 움직일 수 없습니다.");
+				System.out.println("[!] 오른쪽으로 더 이상 움직일 수 없습니다.");
 				return;
 			} y++; break;				
 		default :
@@ -99,6 +91,7 @@ class Bear extends GameObject{
 	@Override
 	protected char getShape() { return 'H'; }			
 }
+
 
 class Game{
 	private static int gameCount=0;
@@ -124,6 +117,7 @@ class Game{
 			}System.out.println();
 		}
 	}
+	
 	public void movingBear() {
 		stage[bear.getX()][bear.getY()]=" - ";
 		bear.move();
@@ -131,12 +125,14 @@ class Game{
 		moveCount++;
 		gameCount++;
 	}
+	
 	public void movingFish() {
 		stage[fish.getX()][fish.getY()]=" - ";
 		fish.move();
 		stage[fish.getX()][fish.getY()]=" "+String.valueOf(fish.getShape())+" ";
 		moveCount=0;
 	}
+	
 	public void run() {		
 		while(true) {
 			showStage();
@@ -153,8 +149,7 @@ class Game{
 	}
 }
 
-public class OpenChallange{	
-	
+public class OpenChallange{		
 	public static void main(String[] args) {
 		Game g = new Game();
 		System.out.println("*** 현준이의 물고기 잡기 게임 ***");	
