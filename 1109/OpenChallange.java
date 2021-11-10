@@ -130,13 +130,13 @@ class Game{
 		stage[fish.getX()][fish.getY()]=" - ";
 		fish.move();
 		stage[fish.getX()][fish.getY()]=" "+String.valueOf(fish.getShape())+" ";
-		moveCount=0;
+		if(moveCount==4)moveCount=0;
 	}
 	
 	public void run() {		
 		while(true) {
 			showStage();
-			if(moveCount==3) {
+			if(moveCount==3 || moveCount==4) {
 				movingFish();
 			}
 			movingBear();
