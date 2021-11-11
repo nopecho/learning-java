@@ -1,11 +1,11 @@
 import java.util.Scanner;
-
 interface Stack{
 	int length();
 	int capacity();
 	String pop();
 	boolean push(String val);
 }
+
 class StringStack implements Stack{
 	Scanner sc = new Scanner(System.in);
 	public String[] s;
@@ -23,16 +23,16 @@ class StringStack implements Stack{
 	public int capacity() { return s.length-length(); }
 	
 	@Override
-	public String pop() {
+	public String pop() { //2 ì–˜ í˜¸ì¶œí•´ì„œ ì¶”ê°€
 		if(capacity()==0) {
 			return null;
 		}return s[0];
 	}
 	
 	@Override
-	public boolean push(String val) {
+	public boolean push(String val) { //1 ì–˜ê°€ ì°¸ì´ë©´
 		if(capacity()==0) {
-			System.out.println("[!] ½ºÅÃÀÌ °¡µæ Â÷¼­ Çª½Ã ºÒ°¡");
+			System.out.println("[!] ìŠ¤íƒì´ ê°€ë“ ì°¨ì„œ í‘¸ì‹œ ë¶ˆê°€");
 			return false;
 		}s[capacity()-1]=val;
 		return true;
@@ -42,15 +42,15 @@ class StringStack implements Stack{
 public class Quiz_9_StackApp {	
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
-		System.out.print("ÃÑ ½ºÅÃ ÀúÀå °ø°£ÀÇ Å©±â ÀÔ·Â : ");
+		System.out.print("ì´ ìŠ¤íƒ ì €ì¥ ê³µê°„ì˜ í¬ê¸° ì…ë ¥ : ");
 		int length = sc.nextInt();
 		StringStack app = new StringStack(length);	
 		
 		while(true) {
-			System.out.print("¹®ÀÚ¿­ ÀÔ·Â : ");
+			System.out.print("ë¬¸ìì—´ ì…ë ¥ : ");
 			String str = sc.next();
-			if(str.equals("±×¸¸")) {
-				System.out.print("½ºÅÃ¿¡ ÀúÀåµÈ ¸ğµĞ ¹®ÀÚ¿­ ÆË : ");
+			if(str.equals("ê·¸ë§Œ")) {
+				System.out.print("ìŠ¤íƒì— ì €ì¥ëœ ëª¨ë‘” ë¬¸ìì—´ íŒ : ");
 				for(int i=0;i<length;i++) {
 					System.out.print(app.s[i]+" ");
 				}
