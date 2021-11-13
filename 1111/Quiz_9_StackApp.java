@@ -23,14 +23,14 @@ class StringStack implements Stack{
 	public int capacity() { return s.length-length(); }
 	
 	@Override
-	public String pop() { //2 얘 호출해서 추가
+	public String pop() { //현재 스택의 0번째 문자열 리턴 메소드( 해당 메소드 실행하면 0번째 문자열이 리턴되고 1번 문자열이 0번 문자열이 됨)
 		if(capacity()==0) {
 			return null;
 		}return s[0];
 	}
 	
 	@Override
-	public boolean push(String val) { //1 얘가 참이면
+	public boolean push(String val) { //현재 스택에 문자열 추가 메소드(추가 된 문자열은 스택의 0번째에 추가)
 		if(capacity()==0) {
 			System.out.println("[!] 스택이 가득 차서 푸시 불가");
 			return false;
