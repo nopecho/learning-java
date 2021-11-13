@@ -1,12 +1,12 @@
 import java.util.Scanner;
-interface Stack{
+interface Stack{ //스택 인터페이스
 	int length();
 	int capacity();
 	String pop();
 	boolean push(String val);
 }
 
-class StringStack implements Stack{
+class StringStack implements Stack{ //인터페이스를 상속받은 StringStack 클래스 (해당 클래스는 인터페이스의 모든 메소드 오버라이드 해야됨)
 	Scanner sc = new Scanner(System.in);
 	public String[] s;
 	StringStack(int length){ this.s = new String[length]; }
