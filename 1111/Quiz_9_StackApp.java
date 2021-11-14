@@ -9,7 +9,9 @@ interface Stack{ //스택 인터페이스
 class StringStack implements Stack{ //인터페이스를 상속받은 StringStack 클래스 (해당 클래스는 인터페이스의 모든 메소드 오버라이드 해야됨)
 	Scanner sc = new Scanner(System.in);
 	public String[] s;
-	StringStack(int length){ this.s = new String[length]; }
+	StringStack(int length){
+		this.s = new String[length];
+	}
 	
 	@Override
 	public int length() {
@@ -20,7 +22,9 @@ class StringStack implements Stack{ //인터페이스를 상속받은 StringStac
 		return count;
 	}
 	@Override
-	public int capacity() { return s.length-length(); }
+	public int capacity() {
+		return s.length-length();
+	}
 	
 	@Override
 	public String pop() { //현재 스택의 0번째 문자열 리턴 메소드( 해당 메소드 실행하면 0번째 문자열이 리턴되고 1번 문자열이 0번 문자열이 됨)
