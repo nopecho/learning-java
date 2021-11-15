@@ -1,5 +1,5 @@
 import java.util.Scanner;
-interface Stack{
+interface Stack{ //Stack 데이터 구조 : 선입후출의 데이터 
 	int length();
 	int capacity();
 	String pop();
