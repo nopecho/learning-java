@@ -1,48 +1,51 @@
 import java.util.Scanner;
 
-abstract class Shape{ //Ãß»óÅ¬·¡½º
+abstract class Shape{ //ì¶”ìƒí´ëž˜ìŠ¤
 	private Shape next;
+	public int index;
+	public void setIndex(int index) { this.index=index; }
 	public Shape() { next=null; }
-	public void setNext(Shape obj) { next=obj; } //¸µÅ© ¿¬°á
-	public Shape getNext() { return next; }	//next
+	public void setNext(Shape obj) { next=obj; } //ë§í¬ ì—°ê²°
+	public Shape getNext() { return next; }
 	public abstract void draw();
 }
 class Line extends Shape{
 	@Override
-	public void draw() { System.out.println("L I N E"); }	
+	public void draw() { System.out.println("ã…¡"); }	
 }
 class Rect extends Shape{
 	@Override
-	public void draw() { System.out.println("R E C T"); }		
+	public void draw() { System.out.println("ã…"); }		
 }
 class Circle extends Shape{
 	@Override
-	public void draw() { System.out.println("C I R C L E"); }		
+	public void draw() { System.out.println("ã…‡"); }		
 }
 
 class GraphicEditor{
 	Scanner sc = new Scanner(System.in);
 	private int count=0;
-	private int index;
 	private boolean f = true;
 	private Shape start;
 	private Shape last;
 	
 	public void push() {
 		Shape temp = null;
-		System.out.print("--------- Line(1), Rect(2), Circle(3) --------- : ");
+		System.out.print("ã…¡ ã… ã…‡ Line(1), Rect(2), Circle(3) ã…‡ ã… ã…¡ :");
 		switch(sc.next()) {
 		case "1": temp = new Line(); break;		
 		case "2": temp = new Rect(); break;
 		case "3": temp = new Circle(); break;
-		default : System.out.println("1 ~ 3 ¸¸ ÀÔ·Â");
+		default : System.out.println("1 ~ 3 ë§Œ ìž…ë ¥");
 		}
 		if(count==0) {
+			temp.setIndex(count);
 			start=temp; 
-			last=start; 
+			last=start;
 			count++; 
 			return;
 		}
+		temp.setIndex(count);
 		last.setNext(temp); 
 		last=temp;
 		temp=start;
@@ -50,18 +53,22 @@ class GraphicEditor{
 	}
 	
 	public void delete(){
-		if(count==0) {
-			System.out.println("»èÁ¦ÇÒ µµÇüÀÌ ¾ø½À´Ï´Ù.");
+		System.out.print("ì‚­ì œí•  ë„í˜•ì˜ ìœ„ì¹˜[index 0 ~] : ");
+		int num = sc.nextInt();	
+		if(num>count-1) {
+			System.out.println("ì‚­ì œí•  ë„í˜•ì´ ì—†ìŠµë‹ˆë‹¤.");
 			return;
 		}
-		System.out.print("»èÁ¦ÇÒ µµÇüÀÇ À§Ä¡ : ");
-		int num = sc.nextInt();	
-		if(num>count) {
-			System.out.println("»èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.");
-			return;
-		}else if(num<=count){
-			
-		}	
+		Shape p = start; //ë§í¬ ì‹œìž‘ ì£¼ì†Œ
+		if(num==0) { //0ë²ˆì§¸ ì§€ìš°ê¸°
+			start=start.getNext();
+		}
+		for(int i=0;i<count;i++) { // ì¤‘ê°„êº¼,ë§ˆì§€ë§‰êº¼ ì§€ìš°ê¸°
+			if(p.index==num-1) {
+				p.setNext(p.getNext().getNext());
+				return;
+			}p = p.getNext();
+		}
 	}
 	
 	public void show() {
@@ -73,20 +80,20 @@ class GraphicEditor{
 	}
 	
 	public void finish() {
-		System.out.println("Á¾·á");
+		System.out.println("ì¢…ë£Œ");
 		f=false;
 	}
 	
 	public void run() {
-		System.out.println("±×·¡ÇÈ ¿¡µðÅÍ ½ÃÀÛ");
+		System.out.println("ê·¸ëž˜í”½ ì—ë””í„° ì‹œìž‘");
 		while(f) {
-			System.out.print("--------- Push(1), Delete(2), Show(3), Finish(4) --------- : ");
+			System.out.print("< Push(1), Delete(2), Show(3), Finish(4) > : ");
 			switch(sc.next()) {
 			case "1" : push(); break;
 			case "2" : delete(); break;
 			case "3" : show(); break;
 			case "4" : finish(); break;
-			default : System.out.println("1 ~ 4 ¸¸ ÀÔ·Â");		
+			default : System.out.println("1 ~ 4 ë§Œ ìž…ë ¥");		
 			}
 		}
 	}
