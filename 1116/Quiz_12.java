@@ -2,8 +2,6 @@ import java.util.Scanner;
 
 abstract class Shape{ //추상클래스
 	private Shape next;
-	public int index;
-	public void setIndex(int index) { this.index=index; }
 	public Shape() { next=null; }
 	public void setNext(Shape obj) { next=obj; } //링크 연결
 	public Shape getNext() { return next; }
@@ -29,7 +27,7 @@ class GraphicEditor{
 	private Shape start;
 	private Shape last;
 	
-	public void push() {
+	public void push() { //삽입 메소드
 		Shape temp = null;
 		System.out.print("ㅡ ㅁ ㅇ Line(1), Rect(2), Circle(3) ㅇ ㅁ ㅡ :");
 		switch(sc.next()) {
@@ -38,40 +36,41 @@ class GraphicEditor{
 		case "3": temp = new Circle(); break;
 		default : System.out.println("1 ~ 3 만 입력");
 		}
-		if(count==0) {
-			temp.setIndex(count);
-			start=temp; 
-			last=start;
+		if(count==0) { //첫 push()
+			start=temp; //start레퍼런스를 temp로
+			last=start; //last와 start를 연결
 			count++; 
 			return;
 		}
-		temp.setIndex(count);
-		last.setNext(temp); 
-		last=temp;
+		last.setNext(temp); //last.next = temp
+		last=temp; //last 레퍼런스를 temp로
 		temp=start;
 		count++;
 	}
 	
-	public void delete(){
-		System.out.print("삭제할 도형의 위치[index 0 ~] : ");
+	public void delete(){ //삭제 메소드
+		System.out.print("삭제할 도형의 위치(시작 index=0) : ");
 		int num = sc.nextInt();	
 		if(num>count-1) {
 			System.out.println("삭제할 도형이 없습니다.");
 			return;
 		}
-		Shape p = start; //링크 시작 주소
-		if(num==0) { //0번째 지우기
-			start=start.getNext();
+		Shape p = start; //링크 시작 주소 p (0번째)
+		if(num==0) { //0번째 연결 해제 if문
+			start=start.getNext(); //start를 start.next의 레퍼런스로
+			count--;
+			return;
 		}
-		for(int i=0;i<count;i++) { // 중간꺼,마지막꺼 지우기
-			if(p.index==num-1) {
-				p.setNext(p.getNext().getNext());
+		for(int i=0;i<num;i++) { //중간 or 마지막 연결 해제 for문
+			if(i==num-1) { //i가 for문의 마지막까지 돈다면
+				p.setNext(p.getNext().getNext()); //원하는 값 찾아가서 p의 다음 다음 으로 넘김, ex) 0 1 2 3 4 5 에서 1번째를 지우고 싶다면 0번째의 next링크를 1번째 건너뛰고 2번째로 연결해줌. 
+				count--;
 				return;
-			}p = p.getNext();
+			}p = p.getNext(); //if문 해당 안되면 for문돌면서 링크를 넘김
 		}
 	}
 	
-	public void show() {
+	public void show() { //모두보기 메소드
 		Shape p = start;
 		while(p!=null) {
 			p.draw();
@@ -79,7 +78,7 @@ class GraphicEditor{
 		}
 	}
 	
-	public void finish() {
+	public void finish() { //종료 메소드
 		System.out.println("종료");
 		f=false;
 	}
