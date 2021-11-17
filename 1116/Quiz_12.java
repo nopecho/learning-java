@@ -24,8 +24,7 @@ class GraphicEditor{
 	Scanner sc = new Scanner(System.in);
 	private int count=0; //링크에 연결될때마다 count++
 	private boolean f = true;
-	private Shape start; //시작 주소 찾기 위한 Shape레퍼런스 변수 
-	private Shape last; //마지막 주소 찾기 위한 Shape레퍼런스 변수
+	private Shape start,last; //시작,마지막 주소 찾기 위한 Shape레퍼런스 변수 
 	
 	public void push() { //삽입 메소드
 		Shape temp = null; //빈 Shape타입 레퍼런스 선언 (왜? 1,2,3 입력 받은 객체를 생성하고 담기위해)
