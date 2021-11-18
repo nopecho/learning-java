@@ -6,6 +6,7 @@ class GraphicEditor {
 	private Scanner sc = new Scanner(System.in);
 	private String name;
 	private Shape start=null,last=null;
+	private int count=0;
 	
 	GraphicEditor(String name){ this.name=name; }
 	
@@ -17,10 +18,13 @@ class GraphicEditor {
 		case 2: temp = new Rect(); break;
 		case 3: temp = new Circle(); break;
 		}
+		if(index>count) {
+			return false;
+		}
 		for(int i=0;i<index-1;i++) { //삽입할 위치까지 찾아감
 			c=c.getNext();
 		}
-		if(start==null) { //최초 삽입 
+		if(start==null) { //최초 삽입
 			start=last=temp;
 		}
 		else if(index==0) { //시작값이 있고 start에 삽입
@@ -31,14 +35,16 @@ class GraphicEditor {
 		else if(c==null) { //시작값이 있고 last에 삽입
 			temp.setPrev(last);
 			last.setNext(temp);
-			last=temp;		
+			last=temp;
 		}
 		else if(c!=null) { //시작값이 있고 중간에 삽입
 			temp.setPrev(c.getPrev());
 			temp.setNext(c.getNext());
 			c.setPrev(temp);
-			c.setNext(temp);
-		}return true;
+			c.setNext(temp);		
+		}
+		count++;
+		return true;
 	}
 		
 	private boolean delete(int index) { //삭제메소드
