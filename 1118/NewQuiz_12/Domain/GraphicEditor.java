@@ -1,7 +1,6 @@
-package Domain;
-
+package domain;
 import java.util.Scanner;
-import Model.*;
+import model.*;
 
 class GraphicEditor {
 	private Scanner sc = new Scanner(System.in);
@@ -10,63 +9,71 @@ class GraphicEditor {
 	
 	GraphicEditor(String name){ this.name=name; }
 	
-	private boolean push(int num,int index) { //»ğÀÔ¸Ş¼Òµå
-		Shape temp=null;
-		Shape p = start;
+	private boolean push(int num,int index) { //ì‚½ì…ë©”ì†Œë“œ
+		Shape temp = null;
+		Shape c = start;
 		switch(num) {
-		case 1: temp = new Line();
-		case 2: temp = new Rect();
-		case 3: temp = new Circle();
+		case 1: temp = new Line(); break;
+		case 2: temp = new Rect(); break;
+		case 3: temp = new Circle(); break;
 		}
-		if(index==0) {
+		for(int i=0;i<index-1;i++) { //ì‚½ì…í•  ìœ„ì¹˜ê¹Œì§€ ì°¾ì•„ê°
+			c=c.getNext();
+		}
+		if(start==null) { //ìµœì´ˆ ì‚½ì… 
 			start=last=temp;
-			return true;
 		}
-		for(int i=0;i<index;i++) {
-			p=p.getNext();
+		else if(index==0) { //ì‹œì‘ê°’ì´ ìˆê³  startì— ì‚½ì…
+			temp.setNext(start);
+			start.setPrev(temp);
+			start=temp;
 		}
-		if(p==null)
-		last.setNext(temp);
-		last=temp;
-		
-		return true;	
+		else if(c==null) { //ì‹œì‘ê°’ì´ ìˆê³  lastì— ì‚½ì…
+			temp.setPrev(last);
+			last.setNext(temp);
+			last=temp;		
+		}
+		else if(c!=null) { //ì‹œì‘ê°’ì´ ìˆê³  ì¤‘ê°„ì— ì‚½ì…
+			temp.setPrev(c.getPrev());
+			temp.setNext(c.getNext());
+			c.setPrev(temp);
+			c.setNext(temp);
+		}return true;
 	}
-	private boolean delete(int index) { //»èÁ¦¸Ş¼Òµå
+		
+	private boolean delete(int index) { //ì‚­ì œë©”ì†Œë“œ
 		Shape p = start;
 		for(int i=0;i<index;i++) {
-			p.getPrev();
 			p=p.getNext();
 		}
 		return true;
 	}
-	
-	
+		
 	void run() {
-		System.out.println("±×·¡ÇÈ ¿¡µğÅÍ "+name+" ¸¦ ½ÇÇàÇÕ´Ï´Ù.");
-		int choice=0; //¸Ş´º ¼±ÅÃ¿ë
-		int num=0; //µµÇü »ğÀÔ¿ë
-		int index=0; //ÀÎµ¦½º¿ë
+		System.out.println("ê·¸ë˜í”½ ì—ë””í„° "+name+" ë¥¼ ì‹¤í–‰í•©ë‹ˆë‹¤.");
+		int choice=0; //ë©”ë‰´ ì„ íƒìš©
+		int num,index; //ë„í˜• ì‚½ì…, ì¸ë±ìŠ¤ ìš©
 		while(choice!=4) {
-			System.out.print("»ğÀÔ(1), »èÁ¦(2), ¸ğµÎº¸±â(3), Á¾·á(4) : ");
+			System.out.print("ì‚½ì…(1), ì‚­ì œ(2), ëª¨ë‘ë³´ê¸°(3), ì¢…ë£Œ(4) : ");
 			choice = sc.nextInt();
 			switch(choice) {
 			case 1://push();
 				System.out.print("Line(1), Rect(2), Circle(3) : ");
 				num = sc.nextInt();
 				if(num<1 || num>3) {
-					System.out.println("1~3¸¸ ÀÔ·ÂÇÏ¼¼¿ä");
+					System.out.println("1~3ë§Œ ì…ë ¥í•˜ì„¸ìš”");
 					break;
-				}System.out.println("»ğÀÔÇÒ À§Ä¡ ÀÔ·Â : ");
+				}System.out.print("ì‚½ì…í•  ìœ„ì¹˜ ì…ë ¥ : ");
 				index = sc.nextInt();
 				if(!push(num,index)) {
-					System.out.println("»ğÀÔÇÒ ¼ö ¾ø½À´Ï´Ù.");
+					System.out.println("ì‚½ì…í•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				}
 				break;
 			case 2:
-				System.out.println("»èÁ¦ÇÒ µµÇü À§Ä¡ ÀÔ·Â : ");
+				System.out.print("ì‚­ì œí•  ë„í˜• ìœ„ì¹˜ ì…ë ¥ : ");
 				index = sc.nextInt();
 				if(!delete(index)) {
-					System.out.println("»èÁ¦ÇÒ ¼ö ¾ø½À´Ï´Ù.");
+					System.out.println("ì‚­ì œí•  ìˆ˜ ì—†ìŠµë‹ˆë‹¤.");
 				}break;
 			case 3:
 				Shape p = start;
@@ -74,8 +81,8 @@ class GraphicEditor {
 					p.draw();
 					p=p.getNext();
 				}break;			
-			case 4: System.out.println("±×·¡ÇÈ ¿¡µğÅÍ "+name+" ¸¦ Á¾·áÇÕ´Ï´Ù.");break;
-			default:System.out.println("1~4¸¸ ÀÔ·ÂÇÏ¼¼¿ä");
+			case 4: System.out.println("ê·¸ë˜í”½ ì—ë””í„° "+name+" ë¥¼ ì¢…ë£Œí•©ë‹ˆë‹¤.");break;
+			default:System.out.println("1~4ë§Œ ì…ë ¥í•˜ì„¸ìš”");
 			}
 		}
 	}
