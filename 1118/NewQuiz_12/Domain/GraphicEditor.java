@@ -28,7 +28,7 @@ class GraphicEditor {
 		if(start==null) { //최초 삽입
 			start=last=temp;
 		}
-		else if(index==0) { //시작값이 있고 start에 삽입
+		else if(c==start) { //시작값이 있고 start에 삽입
 			temp.setNext(start);
 			start.setPrev(temp);
 			start=temp;
