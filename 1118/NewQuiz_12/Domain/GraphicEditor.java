@@ -60,8 +60,7 @@ class GraphicEditor {
 			}
 		}
 		if(start==last) { //값이 하나일때 첫번째 삭제
-			start=null;
-			last=null;
+			start=last=null;
 		}
 		else if(c==start) { //값이 여러개 일때 첫번째 삭제
 			c.getNext().setPrev(null);
