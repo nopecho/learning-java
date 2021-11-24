@@ -16,11 +16,12 @@ public class MemberUi {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         MemberController memberController = new MemberController();
-        boolean stop = false;
-        Action action = null;
+        boolean stop = true;
+        int menu;
 
-        while(!stop){
-            System.out.println("회원 데이터 관리");
+        while(stop){
+            Action action = null;
+            System.out.println("========== 회원 데이터 관리 ==========");
             System.out.println("1.회원가입");
             System.out.println("2.회원 목록 보기");
             System.out.println("3.회원 정보 수정");
@@ -28,7 +29,8 @@ public class MemberUi {
             System.out.println("5.회원 정보 검색");
             System.out.println("6.프로그램 종료");
             System.out.print("메뉴 번호 : ");
-            switch (sc.nextInt()) {
+            menu=sc.nextInt();
+            switch (menu) {
                 case 1:
                     action = new MemberRegistAction();
                     break;
@@ -46,7 +48,8 @@ public class MemberUi {
                     break;
                 case 6:
                     System.out.println("프로그램 종료");
-                    stop = true;
+                    sc.close();
+                    stop = false;
                     break;
                 default:
                     System.out.println("1~6만 입력");

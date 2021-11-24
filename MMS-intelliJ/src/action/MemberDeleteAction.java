@@ -9,7 +9,7 @@ public class MemberDeleteAction implements Action{
     @Override
     public void execute(Scanner sc) throws Exception {
         ConsoleUtil consoleUtil = new ConsoleUtil();
-        int id = consoleUtil.getId("»èÁ¦ ÇÒ", sc);
+        int id = consoleUtil.getId("삭제할", sc);
         MemberDeleteService memberDeleteService = new MemberDeleteService();
 
         boolean deleteSuccess = memberDeleteService.deleteMember(id);

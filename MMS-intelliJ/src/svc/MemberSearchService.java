@@ -17,7 +17,7 @@ public class MemberSearchService {
     }
 
     public Member[] searchMemberByName(String searchValue) {
-        Member[] searchMemberArray = null;
+        Member[] searchMemberArray;
         Member[] tempArray = new Member[MemberUi.memberArray.length];
         int count=0;
 
@@ -26,11 +26,14 @@ public class MemberSearchService {
                 tempArray[count++]= MemberUi.memberArray[i];
             }
         }
-
-        searchMemberArray = new Member[count];
-
-        for(int i=0;i<count;i++) {
-            searchMemberArray[i]=tempArray[i];
+        if(count!=0){
+            searchMemberArray = new Member[count];
+            for(int i=0;i<count;i++) {
+                searchMemberArray[i]=tempArray[i];
+            }
+        }
+        else{
+            searchMemberArray=null;
         }
         return searchMemberArray;
     }

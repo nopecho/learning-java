@@ -8,7 +8,7 @@ public class MemberController {
         try {
             action.execute(sc);
         }catch(Exception e) {
-            sc.nextLine();
+            e.printStackTrace();
         }
     }
 }
