@@ -13,11 +13,6 @@ public class MemberDeleteAction implements Action{
         MemberDeleteService memberDeleteService = new MemberDeleteService();
 
         boolean deleteSuccess = memberDeleteService.deleteMember(id);
-
-        if(deleteSuccess) {
-            consoleUtil.printDeleteSuccessMessage(id);
-        }else {
-            consoleUtil.printDeleteFailMessage(id);
-        }
+        consoleUtil.printDeleteMessage(id,deleteSuccess);
     }
 }

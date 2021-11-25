@@ -8,7 +8,12 @@ public class MemberController {
         try {
             action.execute(sc);
         }catch(Exception e) {
-            e.printStackTrace();
+            if(e instanceof NullPointerException){
+                System.out.println("[!]"+e.getClass().getSimpleName()+": 해당 ID는 존재하지 않습니다");
+            }else if(e instanceof NumberFormatException){
+                e.printStackTrace();
+                System.out.println("[!]"+e.getClass().getSimpleName()+": 해당 ID는 존재하지 않습니다");
+            }
         }
     }
 }

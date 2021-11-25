@@ -6,7 +6,6 @@ import ui.MemberUi;
 public class MemberSearchService {
     public Member searchMemberById(String searchValue) {
         Member member = null;
-
         for(int i = 0; i< MemberUi.memberArray.length; i++) {
             if(MemberUi.memberArray[i].getId()==Integer.parseInt(searchValue)) {
                 member = MemberUi.memberArray[i];

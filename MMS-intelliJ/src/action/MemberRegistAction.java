@@ -12,10 +12,6 @@ public class MemberRegistAction implements Action {
         Member newMember = consoleUtil.getNewMember(sc);
         MemberRegistService memberRegistService = new MemberRegistService();
         boolean registSuccess = memberRegistService.registMember(newMember);
-        if(registSuccess) {
-            consoleUtil.printRegistSuccessMessage(newMember.getId());
-        }else {
-            consoleUtil.printRegistFailMessage(newMember.getId());
-        }
+        consoleUtil.printRegistMessage(newMember.getId(),registSuccess);
     }
 }

@@ -10,7 +10,6 @@ import action.MemberUpdateAction;
 import action.MemberDeleteAction;
 import action.MemberSearchAction;
 
-
 public class MemberUi {
     public static Member[] memberArray = new Member[0];
     public static void main(String[] args) {

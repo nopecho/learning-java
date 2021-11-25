@@ -21,7 +21,7 @@ public class MemberRegistService {
             for(int i=0;i<tempArray.length;i++) {
                 MemberUi.memberArray[i]=tempArray[i];
             }
-            MemberUi.memberArray[MemberUi.memberArray.length-1]=newMember; //¸¶Áö¸· ÀÎµ¦½º¿¡ »ðÀÔ
+            MemberUi.memberArray[MemberUi.memberArray.length-1]=newMember;
         }return registSuccess;
     }
 }

@@ -17,10 +17,6 @@ public class MemberUpdateAction implements Action {
         Member newMember = consoleUtil.getNewMember(oldMember,sc);
 
         boolean updateSuccess = memberUpdateService.updateMember(newMember);
-        if(updateSuccess) {
-            consoleUtil.printUpdateSuccessMessage(newMember.getId());
-        }else {
-            consoleUtil.printUpdateFailMessage(newMember.getId());
-        }
+        consoleUtil.printUpdateMessage(newMember.getId(),updateSuccess);
     }
 }
