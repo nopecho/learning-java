@@ -1,10 +1,13 @@
 package svc;
 
-import ui.MemberUi;
-import vo.Member;
+import util.MemberDB;
 
 public class MemberListService {
-    public Member[] getMemberArray() {
-        return MemberUi.memberArray;
+    public boolean listMember(MemberDB DB) {
+        boolean listSuccess = true;
+        if (DB.getDB().isEmpty()) {
+            listSuccess = false;
+        }
+        return listSuccess;
     }
 }

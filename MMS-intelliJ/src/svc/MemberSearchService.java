@@ -6,8 +6,8 @@ import ui.MemberUi;
 public class MemberSearchService {
     public Member searchMemberById(String searchValue) {
         Member member = null;
-        for(int i = 0; i< MemberUi.memberArray.length; i++) {
-            if(MemberUi.memberArray[i].getId()==Integer.parseInt(searchValue)) {
+        for (int i = 0; i < MemberUi.memberArray.length; i++) {
+            if (MemberUi.memberArray[i].getId() == Integer.parseInt(searchValue)) {
                 member = MemberUi.memberArray[i];
                 break;
             }
@@ -18,21 +18,20 @@ public class MemberSearchService {
     public Member[] searchMemberByName(String searchValue) {
         Member[] searchMemberArray;
         Member[] tempArray = new Member[MemberUi.memberArray.length];
-        int count=0;
+        int count = 0;
 
-        for(int i = 0; i< MemberUi.memberArray.length; i++) {
-            if(searchValue.equals(MemberUi.memberArray[i].getName())){
-                tempArray[count++]= MemberUi.memberArray[i];
+        for (int i = 0; i < MemberUi.memberArray.length; i++) {
+            if (searchValue.equals(MemberUi.memberArray[i].getName())) {
+                tempArray[count++] = MemberUi.memberArray[i];
             }
         }
-        if(count!=0){
+        if (count != 0) {
             searchMemberArray = new Member[count];
-            for(int i=0;i<count;i++) {
-                searchMemberArray[i]=tempArray[i];
+            for (int i = 0; i < count; i++) {
+                searchMemberArray[i] = tempArray[i];
             }
-        }
-        else{
-            searchMemberArray=null;
+        } else {
+            searchMemberArray = null;
         }
         return searchMemberArray;
     }

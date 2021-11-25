@@ -1,24 +1,22 @@
 package ui;
 
 import java.util.Scanner;
-import vo.Member;
 import controller.MemberController;
-import action.Action;
-import action.MemberRegistAction;
-import action.MemberListAction;
-import action.MemberUpdateAction;
-import action.MemberDeleteAction;
-import action.MemberSearchAction;
+import util.InputMismatchCheck;
+import util.MemberDB;
+import vo.Member;
+import action.*;
 
 public class MemberUi {
     public static Member[] memberArray = new Member[0];
+
     public static void main(String[] args) {
+        InputMismatchCheck menu = new InputMismatchCheck();
+        MemberDB DB = new MemberDB();
         Scanner sc = new Scanner(System.in);
         MemberController memberController = new MemberController();
         boolean stop = true;
-        int menu;
-
-        while(stop){
+        while (stop) {
             Action action = null;
             System.out.println("========== 회원 데이터 관리 ==========");
             System.out.println("1.회원가입");
@@ -28,8 +26,7 @@ public class MemberUi {
             System.out.println("5.회원 정보 검색");
             System.out.println("6.프로그램 종료");
             System.out.print("메뉴 번호 : ");
-            menu=sc.nextInt();
-            switch (menu) {
+            switch (menu.Check("MENU")) {
                 case 1:
                     action = new MemberRegistAction();
                     break;
@@ -55,7 +52,7 @@ public class MemberUi {
                     break;
             }
             if (action != null) {
-                memberController.processRequest(sc, action);
+                memberController.processRequest(sc, action, DB);
             }
         }
     }

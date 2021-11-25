@@ -1,27 +1,17 @@
 package svc;
 
-import ui.MemberUi;
+import util.MemberDB;
 import vo.Member;
 
 public class MemberRegistService {
 
-    public boolean registMember(Member newMember) throws Exception{
-        boolean registSuccess=true;
-
-        for(int i = 0; i< MemberUi.memberArray.length; i++) {
-            if(MemberUi.memberArray[i].getId()==newMember.getId()) {
-                registSuccess=false;
-                break;
-            }
+    public boolean registMember(Member newMember, MemberDB DB) {
+        boolean registSuccess = true;
+        if (!DB.getDB().containsKey(newMember.getId())) { //containsKey():해당 HashMap에 파라미터로 받은 변수 키가 존재 하는지
+            DB.getDB().put(newMember.getId(), newMember);
+        } else {
+            registSuccess = false;
         }
-        if(registSuccess) {
-            Member[] tempArray = MemberUi.memberArray;
-            MemberUi.memberArray = new Member[MemberUi.memberArray.length+1];
-
-            for(int i=0;i<tempArray.length;i++) {
-                MemberUi.memberArray[i]=tempArray[i];
-            }
-            MemberUi.memberArray[MemberUi.memberArray.length-1]=newMember;
-        }return registSuccess;
+        return registSuccess;
     }
 }
