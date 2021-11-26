@@ -1,30 +1,18 @@
 package svc;
 
-import ui.MemberUi;
+import util.MemberDB;
 import vo.Member;
 
 public class MemberUpdateService {
-    public Member getOldMember(int id) {
+    public Member getOldMember(int id, MemberDB DB) {
         Member oldMember = null;
-        for (int i = 0; i < MemberUi.memberArray.length; i++) {
-            if (MemberUi.memberArray[i].getId() == id) {
-                oldMember = MemberUi.memberArray[i];
-                break;
-            }
+        if (DB.getDB().containsKey(id)) {
+            oldMember = DB.getDB().get(id);
         }
         return oldMember;
     }
 
-    public boolean updateMember(Member newMember) {
-        boolean updateSuccess = false;
-
-        for (int i = 0; i < MemberUi.memberArray.length; i++) {
-            if (MemberUi.memberArray[i].getId() == newMember.getId()) {
-                MemberUi.memberArray[i] = newMember;
-                updateSuccess = true;
-                break;
-            }
-        }
-        return updateSuccess;
+    public void updateMember(Member newMember, MemberDB DB) {
+        DB.getDB().replace(newMember.getId(), newMember);
     }
 }

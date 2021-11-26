@@ -31,9 +31,45 @@ public class ConsoleUtil {
         return newMember;
     }
 
-    public void printRegistMessage(int id, boolean registSuccess) {
-        if (!registSuccess) System.out.println("* " + id + " 회원 등록 실패 *");
-        else System.out.println("* " + id + " 회원 등록 성공 *");
+
+    public Member getNewMember(Member oldMember, Scanner sc, MemberDB DB) {
+        if (oldMember == null) throw new NullPointerException();
+        Member member = new Member();
+        MemberElementList List = new MemberElementList("new 회원 ");
+        HashMap<String, String> map = new HashMap<>(5);
+
+        System.out.println("========== new 회원 정보 수정 ==========");
+        System.out.println(DB.getDB().get(oldMember.getId()));
+//        for(int i=0;i<List.getNewElement().length;i++){
+//            if(List.getElement()[i].equals("아이디")){
+//                System.out.println("이전 회원 아이디 : "+oldMember.getId());
+//                member.setId(oldMember.getId());
+//            }else if(List.getElement()[i].equals("나이")){
+//                System.out.print(List.getNewElement()[i]);
+//                member.setAge(num.Check("AGE"));
+//            }else{
+//                System.out.print(List.getNewElement()[i]);
+//                map.put(List.getElement()[i], sc.next());
+//            }
+//        }
+//        member.setName(map.get("이름"));
+//        member.setEmail(map.get("이메일"));
+//        member.setAddr(map.get("주소"));
+//        member.setHobby(map.get("취미"));
+//        member.setTel(map.get("전화번호"));
+        boolean ID = true;
+        sc.nextLine();
+        while(ID){
+            System.out.print("수정 항목 입력(공백으로 구분) : ");
+            String element = sc.nextLine();
+            String[] elements = element.split(" ");
+            if(map.containsKey("아이디")){
+                System.out.println("[!]ID는 수정 불가");
+            }else{
+                ID=false;
+            }
+        }
+        return member;
     }
 
     public void printMemberList(MemberDB DB, boolean listSuccess) {
@@ -44,51 +80,6 @@ public class ConsoleUtil {
         } else {
             System.out.println("[!] 현재 회원 정보가 없습니다.");
         }
-    }
-
-    public int getId(String msgKind) {
-        System.out.print(msgKind + "아이디 : ");
-        return num.Check("ID");
-    }
-
-    public Member getNewMember(Member oldMember, Scanner sc) {
-        if (oldMember == null) throw new NullPointerException();
-        Member member = new Member();
-        System.out.println("========== new 회원 정보 수정 ==========");
-        System.out.println("<수정 항목 선택>");
-        System.out.println("회원 아이디 : " + oldMember.getId());
-        System.out.print("이전 회원 이름 : " + oldMember.getName() + "\nnew 회원 이름 : ");
-        String name = sc.next();
-        System.out.print("이전 회원 나이 : " + oldMember.getAge() + "\nnew 회원 나이  : ");
-        int age = num.Check("AGE");
-        System.out.print("이전 회원 이메일 : " + oldMember.getEmail() + "\nnew 회원 이메일 : ");
-        String email = sc.next();
-        System.out.print("이전 회원 주소 : " + oldMember.getAddr() + "\nnew 회원 주소 : ");
-        String addr = sc.next();
-        System.out.print("이전 회원 취미 : " + oldMember.getHobby() + "\nnew 회원 취미 : ");
-        String hobby = sc.next();
-        System.out.print("이전 회원 전화번호 : " + oldMember.getTel() + "\nnew 회원 전화번호 : ");
-        String tel = sc.next();
-
-        member.setId(oldMember.getId());
-        member.setName(name);
-        member.setEmail(email);
-        member.setAddr(addr);
-        member.setHobby(hobby);
-        member.setTel(tel);
-        member.setAge(age);
-
-        return member;
-    }
-
-    public void printUpdateMessage(int id, boolean updateSuccess) {
-        if (!updateSuccess) System.out.println("* " + id + " 회원 정보 수정 실패 *");
-        else System.out.println("* " + id + " 회원 정보 수정 성공 *");
-    }
-
-    public void printDeleteMessage(int id, boolean deleteSuccess) {
-        if (!deleteSuccess) System.out.println("* " + id + " 회원 정보 삭제 실패 *");
-        else System.out.println("* " + id + " 회원 정보 삭제 성공 *");
     }
 
     public SearchData getSearchData(Scanner sc) {
@@ -112,21 +103,41 @@ public class ConsoleUtil {
         return searchData;
     }
 
-    public void printSearchMember(Member member) {
+    public void printSearchMember(Member member,String value) {
         if (member != null) {
-            System.out.println(member.getId() + "으로 검색 한 결과");
-            System.out.println(member);
+            System.out.println(value + "으로 검색 한 결과\n"+member);
+        }else{
+            System.out.println("[!]"+value+" 검색 결과가 없습니다.");
         }
-        System.out.println("[!] 검색 결과가 없습니다.");
     }
 
-    public void printSearchMemberArray(Member[] memberArray) {
-        if (memberArray != null) {
-            System.out.println(memberArray[0].getName() + " 으로 검색 한 결과");
-            for (Member member : memberArray) {
+    public void printSearchMemberList(ArrayList<Member> memberList,String value){
+        if(memberList.size()==0){
+            System.out.println("[!]"+value+" 검색 결과가 없습니다.");
+        }else{
+            System.out.println(value + " 으로 검색 한 결과");
+            for( Member member : memberList){
                 System.out.println(member);
             }
         }
-        System.out.println("[!] 해당 이름으로 검색한 결과가 없습니다.");
+    }
+
+    public void printRegistMessage(int id, boolean registSuccess) {
+        if (!registSuccess) System.out.println("* " + id + " 회원 등록 실패 *");
+        else System.out.println("* " + id + " 회원 등록 성공 *");
+    }
+
+    public void printUpdateMessage(int id) {
+        System.out.println("* " + id + " 회원 정보 수정 성공 *");
+    }
+
+    public void printDeleteMessage(int id, boolean deleteSuccess) {
+        if (!deleteSuccess) System.out.println("* " + id + " 회원 정보 삭제 실패 *");
+        else System.out.println("* " + id + " 회원 정보 삭제 성공 *");
+    }
+
+    public int getId(String msgKind) {
+        System.out.print(msgKind + " 아이디 : ");
+        return num.Check("ID");
     }
 }

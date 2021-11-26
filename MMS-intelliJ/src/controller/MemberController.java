@@ -11,9 +11,6 @@ public class MemberController {
         } catch (Exception e) {
             if (e instanceof NullPointerException) {
                 System.out.println("[!]" + e.getClass().getSimpleName() + ": 해당 ID는 존재하지 않습니다");
-            } else if (e instanceof NumberFormatException) {
-                e.printStackTrace();
-                System.out.println("[!]" + e.getClass().getSimpleName() + ": 해당 ID는 존재하지 않습니다");
             }
         }
     }

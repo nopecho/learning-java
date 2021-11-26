@@ -4,12 +4,9 @@ import java.util.Scanner;
 import controller.MemberController;
 import util.InputMismatchCheck;
 import util.MemberDB;
-import vo.Member;
 import action.*;
 
 public class MemberUi {
-    public static Member[] memberArray = new Member[0];
-
     public static void main(String[] args) {
         InputMismatchCheck menu = new InputMismatchCheck();
         MemberDB DB = new MemberDB();
