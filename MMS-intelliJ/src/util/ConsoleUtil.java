@@ -9,7 +9,7 @@ public class ConsoleUtil {
 
     public Member getNewMember(Scanner sc) {
         Member newMember = new Member();
-        MemberElementList list = new MemberElementList("new 회원 ");
+        MemberElementList list = new MemberElementList();
         HashMap<String, String> map = new HashMap<>(5);
 
         System.out.println("========== new 회원 정보 등록 ==========");
@@ -30,45 +30,43 @@ public class ConsoleUtil {
         newMember.setTel(map.get("전화번호"));
         return newMember;
     }
-
-
-    public Member getNewMember(Member oldMember, Scanner sc, MemberDB DB) {
+    //Overload
+    public Member getNewMember(Member oldMember, Scanner sc) {
         if (oldMember == null) throw new NullPointerException();
         Member member = new Member();
-        MemberElementList List = new MemberElementList("new 회원 ");
-        HashMap<String, String> map = new HashMap<>(5);
+        MemberElementList list = new MemberElementList();
+        HashMap<String, Object> map = new HashMap<>();
+        boolean checkId = true;
 
         System.out.println("========== new 회원 정보 수정 ==========");
-        System.out.println(DB.getDB().get(oldMember.getId()));
-//        for(int i=0;i<List.getNewElement().length;i++){
-//            if(List.getElement()[i].equals("아이디")){
-//                System.out.println("이전 회원 아이디 : "+oldMember.getId());
-//                member.setId(oldMember.getId());
-//            }else if(List.getElement()[i].equals("나이")){
-//                System.out.print(List.getNewElement()[i]);
-//                member.setAge(num.Check("AGE"));
-//            }else{
-//                System.out.print(List.getNewElement()[i]);
-//                map.put(List.getElement()[i], sc.next());
-//            }
-//        }
+        System.out.println(oldMember);
+        sc.nextLine();
+        while(checkId){
+            System.out.print("수정 항목 입력(공백으로 구분) : ");
+            String element = sc.nextLine();
+            String[] elements = element.split(" ");
+            for (String update : elements) map.put(update, oldMember);
+
+            if(map.containsKey("아이디")){
+                System.out.println("[!]ID는 수정 불가");
+                map.clear();
+                continue;
+            }
+            for(String string : list.getElement()){
+                if(!map.containsKey(string)){
+                    System.out.println("[!]수정 항목을 정확히 입력하세요");
+                    break;
+                }
+            }
+//            checkId=false;
+        }
+//        member.setId(oldMember.getId());
+//        member.setAge(num.Check("AGE"));
 //        member.setName(map.get("이름"));
 //        member.setEmail(map.get("이메일"));
 //        member.setAddr(map.get("주소"));
 //        member.setHobby(map.get("취미"));
 //        member.setTel(map.get("전화번호"));
-        boolean ID = true;
-        sc.nextLine();
-        while(ID){
-            System.out.print("수정 항목 입력(공백으로 구분) : ");
-            String element = sc.nextLine();
-            String[] elements = element.split(" ");
-            if(map.containsKey("아이디")){
-                System.out.println("[!]ID는 수정 불가");
-            }else{
-                ID=false;
-            }
-        }
         return member;
     }
 
@@ -87,7 +85,6 @@ public class ConsoleUtil {
         System.out.print("아이디 or 이름\n검색 조건 : ");
         String searchCondition = sc.next();
         String searchValue = null;
-
         if (searchCondition.equals("아이디")) {
             System.out.print("검색 할 아이디 : ");
             searchValue = String.valueOf(num.Check("ID"));
