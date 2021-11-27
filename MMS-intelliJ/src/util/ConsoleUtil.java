@@ -2,6 +2,7 @@ package util;
 
 import vo.Member;
 import vo.SearchData;
+
 import java.util.*;
 
 public class ConsoleUtil {
@@ -10,75 +11,42 @@ public class ConsoleUtil {
     public Member getNewMember(Scanner sc) {
         Member newMember = new Member();
         MemberElementList list = new MemberElementList();
-        HashMap<String, String> map = new HashMap<>(5);
 
         System.out.println("========== new 회원 정보 등록 ==========");
-        for (int i = 0; i < list.getNewElement().length; i++) {
-            System.out.print(list.getNewElement()[i]);
-            if (list.getElement()[i].equals("아이디")) {
-                newMember.setId(num.Check("ID"));
-            } else if (list.getElement()[i].equals("나이")) {
-                newMember.setAge(num.Check("AGE"));
-            } else {
-                map.put(list.getElement()[i], sc.next());
-            }
+        for (String element : list.getElement()) {
+            System.out.print("new 회원 " + element + " : ");
+            list.setMemberElement(element, sc, newMember);
         }
-        newMember.setName(map.get("이름"));
-        newMember.setEmail(map.get("이메일"));
-        newMember.setAddr(map.get("주소"));
-        newMember.setHobby(map.get("취미"));
-        newMember.setTel(map.get("전화번호"));
         return newMember;
     }
-    //Overload
+
     public Member getNewMember(Member oldMember, Scanner sc) {
         if (oldMember == null) throw new NullPointerException();
         Member member = new Member();
         MemberElementList list = new MemberElementList();
-        HashMap<String, Object> map = new HashMap<>();
-        boolean checkId = true;
+        ArrayList<String> updateList = null;
 
         System.out.println("========== new 회원 정보 수정 ==========");
         System.out.println(oldMember);
         sc.nextLine();
-        while(checkId){
+        while (updateList == null) {    //수정 항목 체크 while문
             System.out.print("수정 항목 입력(공백으로 구분) : ");
             String element = sc.nextLine();
-            String[] elements = element.split(" ");
-            for (String update : elements) map.put(update, oldMember);
-
-            if(map.containsKey("아이디")){
-                System.out.println("[!]ID는 수정 불가");
-                map.clear();
-                continue;
-            }
-            for(String string : list.getElement()){
-                if(!map.containsKey(string)){
-                    System.out.println("[!]수정 항목을 정확히 입력하세요");
-                    break;
-                }
-            }
-//            checkId=false;
+            updateList = list.checkUpdateList(element);
         }
-//        member.setId(oldMember.getId());
-//        member.setAge(num.Check("AGE"));
-//        member.setName(map.get("이름"));
-//        member.setEmail(map.get("이메일"));
-//        member.setAddr(map.get("주소"));
-//        member.setHobby(map.get("취미"));
-//        member.setTel(map.get("전화번호"));
+        for (String element : list.getElement()) {   //수정 항목 업데이트
+            if (updateList.contains(element)) {
+                System.out.print("old 회원 " + element + " : ");
+                System.out.println(list.getMemberElement(element, oldMember));
+                System.out.print("new 회원 " + element + " : ");
+                list.setMemberElement(element, sc, member);
+            } else {
+                list.setMemberElement(element, list.getMemberElement(element, oldMember), member);
+            }
+        }
         return member;
     }
 
-    public void printMemberList(MemberDB DB, boolean listSuccess) {
-        if (listSuccess) {
-            for (Member member : DB.getDB().values()) {
-                System.out.println(member);
-            }
-        } else {
-            System.out.println("[!] 현재 회원 정보가 없습니다.");
-        }
-    }
 
     public SearchData getSearchData(Scanner sc) {
         System.out.println("========== 검색 조건 선택 ==========");
@@ -100,20 +68,30 @@ public class ConsoleUtil {
         return searchData;
     }
 
-    public void printSearchMember(Member member,String value) {
-        if (member != null) {
-            System.out.println(value + "으로 검색 한 결과\n"+member);
-        }else{
-            System.out.println("[!]"+value+" 검색 결과가 없습니다.");
+    public void printMemberList(MemberDB DB, boolean listSuccess) {
+        if (listSuccess) {
+            for (Member member : DB.getDB().values()) {
+                System.out.println(member);
+            }
+        } else {
+            System.out.println("[!] 현재 회원 정보가 없습니다.");
         }
     }
 
-    public void printSearchMemberList(ArrayList<Member> memberList,String value){
-        if(memberList.size()==0){
-            System.out.println("[!]"+value+" 검색 결과가 없습니다.");
-        }else{
+    public void printSearchMember(Member member, String value) {
+        if (member != null) {
+            System.out.println(value + "으로 검색 한 결과\n" + member);
+        } else {
+            System.out.println("[!]" + value + " 검색 결과가 없습니다.");
+        }
+    }
+
+    public void printSearchMemberList(ArrayList<Member> memberList, String value) {
+        if (memberList.size() == 0) {
+            System.out.println("[!]" + value + " 검색 결과가 없습니다.");
+        } else {
             System.out.println(value + " 으로 검색 한 결과");
-            for( Member member : memberList){
+            for (Member member : memberList) {
                 System.out.println(member);
             }
         }
