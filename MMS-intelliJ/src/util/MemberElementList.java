@@ -87,7 +87,7 @@ public class MemberElementList {
         return repetRemove(newList);
     }
 
-    private ArrayList<String> repetRemove(ArrayList<String> arrayList) { //반복 제거
+    private ArrayList<String> repetRemove(ArrayList<String> arrayList) { //중복 제거
         if (arrayList == null) return null;
         ArrayList<String> resultList = new ArrayList<>();
 
