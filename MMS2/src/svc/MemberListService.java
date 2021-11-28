@@ -1,10 +1,9 @@
 package svc;
 
-import ui.MemberUI;
-import vo.Member;
+import util.MemberDB;
 
 public class MemberListService {
-    public Member[] getMemberArray() {
-        return MemberUI.memberArray;
+    public boolean isEmptyMember(MemberDB DB) {
+        return !DB.getDB().isEmpty();
     }
 }

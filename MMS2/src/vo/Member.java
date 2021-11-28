@@ -2,13 +2,12 @@ package vo;
 
 public class Member {
     private int id;
+    private int age;
     private String name;
     private String email;
     private String addr;
     private String hobby;
     private String tel;
-    private int age;
-
 
     public int getId() {
         return id;
@@ -67,8 +66,7 @@ public class Member {
     }
 
     @Override
-    public String toString() {//���� ��ü�� ���ڿ��� ��ȯ�ϱ� ����
-        return "ȸ�� ���̵� :" + id + ". �̸�:" + name + ", �̸��� :" + email + ", �ּ� :" + addr + ", ��� :" + hobby
-                + ", ��ȭ��ȣ :" + tel + ", ���� :" + age;
+    public String toString() {
+        return "회원 [아이디]:" + id + ", [이름]:" + name + ", [이메일]:" + email + ", [주소]:" + addr + ", [취미]:" + hobby + ", [전화번호]:" + tel + ", [나이]:" + age;
     }
 }

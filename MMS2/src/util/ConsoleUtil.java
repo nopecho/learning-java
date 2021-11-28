@@ -1,151 +1,116 @@
 package util;
 
-import java.util.Scanner;
-
 import vo.Member;
-import vo.SearchDate;
+import vo.SearchData;
+import java.util.*;
 
 public class ConsoleUtil {
-    public Member getNewMember(Scanner scan) {
-        Member newMember = new Member();
-        System.out.println("====»õ È¸¿ø Á¤º¸ µî·Ï====");
-        System.out.println("È¸¿ø¾ÆÀÌµğ :");
-        int id = scan.nextInt();
-        System.out.println("È¸¿øÀÌ¸§ :");
-        String name = scan.next();
-        System.out.println("È¸¿øÀÌ¸ŞÀÏ :");
-        String email = scan.next();
-        System.out.println("È¸¿øÁÖ¼Ò :");
-        String addr = scan.next();
-        System.out.println("È¸¿øÃë¹Ì :");
-        String hobby = scan.next();
-        System.out.println("È¸¿ø ÀüÈ­¹øÈ£ :");
-        String tel = scan.next();
-        System.out.println("È¸¿ø³ªÀÌ :");
-        int age = scan.nextInt();
+    private final InputMismatchCheck num = new InputMismatchCheck();
 
-        newMember.setId(id);
-        newMember.setName(name);
-        newMember.setEmail(email);
-        newMember.setAddr(addr);
-        newMember.setHobby(hobby);
-        newMember.setTel(tel);
-        newMember.setAge(age);
+    public Member getNewMember(Scanner sc) {
+        Member newMember = new Member();
+        MemberElementList list = new MemberElementList();
+
+        System.out.println("========== new íšŒì› ì •ë³´ ë“±ë¡ ==========");
+        for (String element : list.getElement()) {
+            System.out.print("new íšŒì› " + element + " : ");
+            list.setMemberElement(element, sc, newMember);
+        }
         return newMember;
     }
 
-    public void printRegistSuccessMessage(int id) {
-        System.out.println(id + "È¸¿ø µî·Ï ¼º°ø");
-    }
+    public Member getNewMember(Member oldMember, Scanner sc) {
+        if (oldMember == null) throw new NullPointerException();
+        Member member = new Member();
+        MemberElementList list = new MemberElementList();
+        ArrayList<String> updateList = null;
 
-    public void printRegistFailMessage(int id) {
-        System.out.println(id + "È¸¿ø µî·Ï ½ÇÆĞ");
-    }
-
-    public void printMemberList(Member[] memberArray) {
-        if (memberArray.length == 0) {
-            System.out.println("Ãß°¡µÈ È¸¿ø Á¤º¸°¡ ¾ø½À´Ï´Ù.");
-        } else {
-            for (int i = 0; i < memberArray.length; i++) {
-                System.out.println(memberArray[i]);
+        System.out.println("========== new íšŒì› ì •ë³´ ìˆ˜ì • ==========");
+        System.out.println(oldMember);
+        sc.nextLine();
+        while (updateList == null) {    //ìˆ˜ì • í•­ëª© ì²´í¬ whileë¬¸
+            System.out.print("ìˆ˜ì • í•­ëª© ì…ë ¥(ê³µë°±ìœ¼ë¡œ êµ¬ë¶„) : ");
+            String element = sc.nextLine();
+            updateList = list.checkList(element);
+        }
+        for (String element : list.getElement()) {   //ìˆ˜ì • í•­ëª© ì—…ë°ì´íŠ¸
+            if (updateList.contains(element)) {
+                System.out.print("old íšŒì› " + element + " : ");
+                System.out.println(list.getMemberElement(element, oldMember));
+                System.out.print("new íšŒì› " + element + " : ");
+                list.setMemberElement(element, sc, member);
+            } else {
+                list.setMemberElement(element, list.getMemberElement(element, oldMember), member);
             }
         }
-    }
-
-    public int getId(String msgKind, Scanner scan) {
-        System.out.println(msgKind + "¾ÆÀÌµğ :");
-        return scan.nextInt();
-    }
-
-    public Member getNewMember(Member oldMember, Scanner sc) {
-        Member member = new Member();
-        System.out.println("====»õ È¸¿ø Á¤º¸ ¼öÁ¤====");
-        System.out.println("È¸¿ø ¾ÆÀÌµğ :" + oldMember.getId());
-        System.out.println("ÀÌÀü ÀÌ¸§: " + oldMember.getName());
-        System.out.print("»õ È¸¿ø ÀÌ¸§ :");
-        String name = sc.next();
-        System.out.println("ÀÌÀü ÀÌ¸ŞÀÏ : " + oldMember.getEmail());
-        System.out.print("»õ È¸¿ø ÀÌ¸ŞÀÏ :");
-        String email = sc.next();
-        System.out.println("ÀÌÀü ÁÖ¼Ò :" + oldMember.getAddr());
-        System.out.print("»õ È¸¿ø ÁÖ¼Ò :");
-        String addr = sc.next();
-        System.out.println("ÀÌÀü Ãë¹Ì :" + oldMember.getHobby());
-        System.out.print("»õ È¸¿ø Ãë¹Ì :");
-        String hobby = sc.next();
-        System.out.println("ÀÌÀü ÀüÈ­¹øÈ£ :" + oldMember.getTel());
-        System.out.print("»õ È¸¿ø ÀüÈ­¹øÈ£ :");
-        String tel = sc.next();
-        System.out.println("ÀÌÀü ³ªÀÌ :" + oldMember.getAge());
-        System.out.println("»õ È¸¿ø ³ªÀÌ :");
-        int age = sc.nextInt();
-
-        member.setId(oldMember.getId());
-        member.setName(name);
-        member.setEmail(email);
-        member.setAddr(addr);
-        member.setHobby(hobby);
-        member.setTel(tel);
-        member.setAge(age);
-
         return member;
     }
 
-    public void printUpdateSuccessMessage(int id) {
-        System.out.println(id + "È¸¿ø Á¤º¸ ¼öÁ¤ ¼º°ø");
-    }
-
-    public void printUpdateFailMessage(int id) {
-        System.out.println(id + "È¸¿ø Á¤º¸ ¼öÁ¤ ½ÇÆĞ");
-    }
-
-    public void printDeleteSuccessMessage(int id) {
-        System.out.println(id + "È¸¿ø Á¤º¸ »èÁ¦ ¼º°ø");
-    }
-
-    public void printDeleteFailMessage(int id) {
-        System.out.println(id + "È¸¿ø Á¤º¸ »èÁ¦ ½ÇÆĞ");
-    }
-
-    public SearchDate getSearchData(Scanner scan) {
-        System.out.println("°Ë»ö Á¶°ÇÀ» ¼±ÅÃÇÏ½Ã¿À.");
-        System.out.println("1. ¾ÆÀÌµğ");
-        System.out.println("2. ÀÌ¸§");
-        System.out.println("°Ë»ö Á¶°Ç :");
-        String searchCondition = scan.next();
+    public SearchData getSearchData(Scanner sc) {
+        System.out.println("========== ê²€ìƒ‰ ì¡°ê±´ ì„ íƒ ==========");
+        System.out.print("ì•„ì´ë”” or ì´ë¦„\nê²€ìƒ‰ ì¡°ê±´ ì…ë ¥ : ");
+        String searchCondition = sc.next();
         String searchValue = null;
-
-        if (searchCondition.equals("1")) {
-            System.out.println("°Ë»öÇÒ ¾ÆÀÌµğ :");
-            searchValue = scan.next();
-        } else if (searchCondition.equals("2")) {
-            System.out.println("°Ë»öÇÒ ÀÌ¸§ :");
-            searchValue = scan.next();
+        if (searchCondition.equals("ì•„ì´ë””")) {
+            System.out.print("ê²€ìƒ‰ í•  ì•„ì´ë”” : ");
+            searchValue = String.valueOf(num.Check("ID"));
+        } else if (searchCondition.equals("ì´ë¦„")) {
+            System.out.print("ê²€ìƒ‰ í•  ì´ë¦„ : ");
+            searchValue = sc.next();
+        } else {
+            System.out.println("[!] 'ì•„ì´ë””' ë˜ëŠ” 'ì´ë¦„'ìœ¼ë¡œë§Œ ê²€ìƒ‰ ê°€ëŠ¥ í•©ë‹ˆë‹¤");
         }
-        SearchDate SearchDate = new SearchDate();
-
-        SearchDate.setSearchCondition(searchCondition);
-        SearchDate.setSearchValue(searchValue);
-        return SearchDate;
+        SearchData searchData = new SearchData();
+        searchData.setSearchCondition(searchCondition);
+        searchData.setSearchValue(searchValue);
+        return searchData;
     }
 
-    public void printSearchMember(Member member) {
-        if (member == null) {
-            System.out.println("°Ë»öÇÑ °á°ú°¡ ¾ø½À´Ï´Ù.");
+    public void printMemberList(MemberDB DB, boolean listSuccess) {
+        if (listSuccess) {
+            for (Member member : DB.getDB().values()) {
+                System.out.println(member);
+            }
         } else {
-            System.out.println(member.getId() + "À¸·Î °Ë»öÇÑ °á°ú");
-            System.out.println(member);
+            System.out.println("[!] í˜„ì¬ íšŒì› ì •ë³´ê°€ ì—†ìŠµë‹ˆë‹¤.");
         }
     }
 
-    public void printSearchMemberArray(Member[] memberArray) {
-        if (memberArray.length == 0) {
-            System.out.println("ÀÌ¸§À¸·Î °Ë»öÇÑ °á°ú°¡ ¾ø½À´Ï´Ù.");
+    public void printSearchMember(Member member, String value) {
+        if (member != null) {
+            System.out.println(value + "ìœ¼ë¡œ ê²€ìƒ‰ í•œ ê²°ê³¼\n" + member);
         } else {
-            System.out.println("ÀÌ¸§À¸·Î °Ë»öÇÑ °á°ú ");
-            for (int i = 0; i < memberArray.length; i++) {
-                System.out.println(memberArray[i]);
+            System.out.println("[!]" + value + " ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        }
+    }
+
+    public void printSearchMemberList(ArrayList<Member> memberList, String value) {
+        if (memberList.size() == 0) {
+            System.out.println("[!]" + value + " ê²€ìƒ‰ ê²°ê³¼ê°€ ì—†ìŠµë‹ˆë‹¤.");
+        } else {
+            System.out.println(value + " ìœ¼ë¡œ ê²€ìƒ‰ í•œ ê²°ê³¼");
+            for (Member member : memberList) {
+                System.out.println(member);
             }
         }
+    }
+
+    public void printRegistMessage(int id, boolean registSuccess) {
+        if (!registSuccess) System.out.println("* " + id + " íšŒì› ë“±ë¡ ì‹¤íŒ¨ *");
+        else System.out.println("* " + id + " íšŒì› ë“±ë¡ ì„±ê³µ *");
+    }
+
+    public void printUpdateMessage(int id) {
+        System.out.println("* " + id + " íšŒì› ì •ë³´ ìˆ˜ì • ì„±ê³µ *");
+    }
+
+    public void printDeleteMessage(int id, boolean deleteSuccess) {
+        if (!deleteSuccess) System.out.println("* " + id + " íšŒì› ì •ë³´ ì‚­ì œ ì‹¤íŒ¨ *");
+        else System.out.println("* " + id + " íšŒì› ì •ë³´ ì‚­ì œ ì„±ê³µ *");
+    }
+
+    public int getId(String msgKind) {
+        System.out.print(msgKind + " ì•„ì´ë”” : ");
+        return num.Check("ID");
     }
 }
