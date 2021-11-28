@@ -3,17 +3,18 @@ package util;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+
 import vo.Member;
 
 public class MemberElementList {
     private final ArrayList<String> element = new ArrayList<>(Arrays.asList("아이디", "이름", "나이", "전화번호", "주소", "이메일", "취미"));
     private final InputMismatchCheck num = new InputMismatchCheck();
 
-    public ArrayList<String> getElement() {
+    ArrayList<String> getElement() {
         return element;
     }
 
-    public Object getMemberElement(String element, Member member) {
+    Object getMemberElement(String element, Member member) {
         switch (element) {
             case "아이디":
                 return member.getId();
@@ -34,7 +35,7 @@ public class MemberElementList {
         }
     }
 
-    public void setMemberElement(String element, Object obj, Member member) {
+    void setMemberElement(String element, Object obj, Member member) {
         if (obj instanceof Scanner) {     //obj 타입검사
             if (element.equals("아이디")) {
                 obj = num.Check("ID");
@@ -69,7 +70,7 @@ public class MemberElementList {
         }
     }
 
-    public ArrayList<String> checkUpdateList(String element) {
+    ArrayList<String> checkList(String element) {
         ArrayList<String> newList = new ArrayList<>(Arrays.asList(element.split(" ")));
 
         for (String check : newList) {
@@ -83,6 +84,18 @@ public class MemberElementList {
                 break;
             }
         }
-        return newList;
+        return repetRemove(newList);
+    }
+
+    private ArrayList<String> repetRemove(ArrayList<String> arrayList) { //반복 제거
+        if (arrayList == null) return null;
+        ArrayList<String> resultList = new ArrayList<>();
+
+        for (String result : arrayList) {
+            if (!resultList.contains(result)) {
+                resultList.add(result);
+            }
+        }
+        return resultList;
     }
 }

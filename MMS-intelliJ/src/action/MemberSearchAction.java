@@ -16,11 +16,11 @@ public class MemberSearchAction implements Action {
         SearchData searchData = consoleUtil.getSearchData(sc);
 
         if (searchData.getSearchCondition().equals("아이디")) {
-            Member member = memberSearchService.searchMemberById(searchData.getSearchValue(),DB);
-            consoleUtil.printSearchMember(member,searchData.getSearchValue());
+            Member member = memberSearchService.searchMemberById(searchData.getSearchValue(), DB);
+            consoleUtil.printSearchMember(member, searchData.getSearchValue());
         } else if (searchData.getSearchCondition().equals("이름")) {
-            ArrayList<Member> memberList = memberSearchService.searchMemberByName(searchData.getSearchValue(),DB);
-            consoleUtil.printSearchMemberList(memberList,searchData.getSearchValue());
+            ArrayList<Member> memberList = memberSearchService.searchMemberByName(searchData.getSearchValue(), DB);
+            consoleUtil.printSearchMemberList(memberList, searchData.getSearchValue());
         }
     }
 }

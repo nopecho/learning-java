@@ -11,7 +11,7 @@ public class MemberListAction implements Action {
         ConsoleUtil consoleUtil = new ConsoleUtil();
         MemberListService memberListService = new MemberListService();
 
-        boolean listSuccess =memberListService.isEmptyMember(DB);
-        consoleUtil.printMemberList(DB,listSuccess);
+        boolean listSuccess = memberListService.isEmptyMember(DB);
+        consoleUtil.printMemberList(DB, listSuccess);
     }
 }

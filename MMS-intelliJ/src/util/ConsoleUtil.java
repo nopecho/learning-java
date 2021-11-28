@@ -2,7 +2,6 @@ package util;
 
 import vo.Member;
 import vo.SearchData;
-
 import java.util.*;
 
 public class ConsoleUtil {
@@ -32,7 +31,7 @@ public class ConsoleUtil {
         while (updateList == null) {    //수정 항목 체크 while문
             System.out.print("수정 항목 입력(공백으로 구분) : ");
             String element = sc.nextLine();
-            updateList = list.checkUpdateList(element);
+            updateList = list.checkList(element);
         }
         for (String element : list.getElement()) {   //수정 항목 업데이트
             if (updateList.contains(element)) {
@@ -47,10 +46,9 @@ public class ConsoleUtil {
         return member;
     }
 
-
     public SearchData getSearchData(Scanner sc) {
         System.out.println("========== 검색 조건 선택 ==========");
-        System.out.print("아이디 or 이름\n검색 조건 : ");
+        System.out.print("아이디 or 이름\n검색 조건 입력 : ");
         String searchCondition = sc.next();
         String searchValue = null;
         if (searchCondition.equals("아이디")) {

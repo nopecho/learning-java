@@ -13,7 +13,7 @@ public class MemberRegistAction implements Action {
         MemberRegistService memberRegistService = new MemberRegistService();
         Member newMember = consoleUtil.getNewMember(sc);
 
-        boolean registSuccess = memberRegistService.registMember(newMember,DB);
-        consoleUtil.printRegistMessage(newMember.getId(),registSuccess);
+        boolean registSuccess = memberRegistService.registMember(newMember, DB);
+        consoleUtil.printRegistMessage(newMember.getId(), registSuccess);
     }
 }
