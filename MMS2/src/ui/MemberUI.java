@@ -1,38 +1,29 @@
 package ui;
 
 import java.util.Scanner;
-
-import action.Action;
-import action.MemberDeleteAction;
-import action.MemberListAction;
-import action.MemberUpdateAction;
-import action.MemberRegistAction;
-import action.MemberSearchAction;
 import controller.MemberController;
-import vo.Member;
+import util.InputMismatchCheck;
+import util.MemberDB;
+import action.*;
 
-public class MemberUI {
-    public static Member[] memberArray = new Member[0];
-
+public class MemberUi {
     public static void main(String[] args) {
-        MemberController memberController = new MemberController();
-        boolean stop = false;
+        InputMismatchCheck menu = new InputMismatchCheck();
+        MemberDB DB = new MemberDB();
         Scanner sc = new Scanner(System.in);
-        Action action = null;
-        int menu = 0;
-        do {
-            System.out.println("====È¸¿øµ¥ÀÌÅÍ °ü¸®====");
-            System.out.print("1.È¸¿ø °¡ÀÔ");
-            System.out.print("2.È¸¿ø ¸ñ·Ï º¸±â");
-            System.out.print("3.È¸¿ø Á¤º¸ ¼öÁ¤");
-            System.out.print("4.È¸¿ø Á¤º¸ »èÀÚ");
-            System.out.print("5.È¸¿ø Á¤º¸ °Ë»ö");
-            System.out.print("6.ÇÁ·Î±×·¥ Á¾·á");
-            System.out.println();
-
-            System.out.println("¸Ş´º ¹øÈ£:");
-            menu = sc.nextInt();
-            switch (menu) {
+        MemberController memberController = new MemberController();
+        boolean stop = true;
+        while (stop) {
+            Action action = null;
+            System.out.println("========== íšŒì› ë°ì´í„° ê´€ë¦¬ ==========");
+            System.out.println("1.íšŒì›ê°€ì…");
+            System.out.println("2.íšŒì› ëª©ë¡ ë³´ê¸°");
+            System.out.println("3.íšŒì› ì •ë³´ ìˆ˜ì •");
+            System.out.println("4.íšŒì› ì •ë³´ ì‚­ì œ");
+            System.out.println("5.íšŒì› ì •ë³´ ê²€ìƒ‰");
+            System.out.println("6.í”„ë¡œê·¸ë¨ ì¢…ë£Œ");
+            System.out.print("ë©”ë‰´ ë²ˆí˜¸ : ");
+            switch (menu.Check("MENU")) {
                 case 1:
                     action = new MemberRegistAction();
                     break;
@@ -49,17 +40,17 @@ public class MemberUI {
                     action = new MemberSearchAction();
                     break;
                 case 6:
-                    stop = true;
-                    System.out.println("ÇÁ·Î±×·¥ Á¾·á");
+                    System.out.println("í”„ë¡œê·¸ë¨ ì¢…ë£Œ");
+                    sc.close();
+                    stop = false;
                     break;
                 default:
+                    System.out.println("1~6ë§Œ ì…ë ¥");
                     break;
             }
-
             if (action != null) {
-                memberController.processRequest(sc, action);
+                memberController.processRequest(sc, action, DB);
             }
-
-        } while (!stop);
+        }
     }
 }
