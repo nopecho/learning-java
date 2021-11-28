@@ -12,7 +12,7 @@ public class InputMismatchCheck {
 			num = sc.nextInt();
 		} catch (InputMismatchException e) {
 			sc.next();
-			System.out.print("[!]" + e.getClass().getSimpleName() + ": " + string + "´Â ¼ıÀÚ¸¸ ÀÔ·ÂÇØÁÖ¼¼¿ä >> ");
+			System.out.print("[!]" + e.getClass().getSimpleName() + ": " + string + "ì€ ìˆ«ìë¡œ ì…ë ¥í•˜ì„¸ìš” >> ");
 			Check(string);
 		}
 		return num;
