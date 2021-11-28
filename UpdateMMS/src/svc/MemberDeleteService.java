@@ -1,30 +1,14 @@
 package svc;
 
-import ui.MemberUI;
-import vo.Member;
+import util.MemberDB;
 
 public class MemberDeleteService {
-	public boolean deleteMember(int id) {
-		boolean deleteSuccess = false;
-		int index = -1;
-
-		for (int i = 0; i < MemberUI.memberArray.length; i++) {
-			if (MemberUI.memberArray[i].getId() == id) {
-				index = i;
-			}
-		}
-		if (index != -1) {// 삭제될 게임 객체
-			Member[] tempArray = MemberUI.memberArray;
-			MemberUI.memberArray = new Member[MemberUI.memberArray.length - 1];
-
-			for (int i = 0; i < tempArray.length; i++) {
-				if (i < index) {
-					MemberUI.memberArray[i] = tempArray[i];
-				} else if (i > index) {
-					MemberUI.memberArray[i - 1] = tempArray[i];
-				}
-			}
-			deleteSuccess = true;
+	public boolean deleteMember(int id, MemberDB DB) {
+		boolean deleteSuccess = true;
+		if (DB.getDB().containsKey(id)) {
+			DB.getDB().remove(id);
+		} else {
+			deleteSuccess = false;
 		}
 		return deleteSuccess;
 	}

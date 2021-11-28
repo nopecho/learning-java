@@ -1,26 +1,19 @@
 package action;
 
 import java.util.Scanner;
-
+import util.MemberDB;
+import vo.Member;
 import svc.MemberRegistService;
 import util.ConsoleUtil;
-import vo.Member;
 
 public class MemberRegistAction implements Action {
-
 	@Override
-	public void execute(Scanner sc) throws Exception {
+	public void execute(Scanner sc, MemberDB DB) throws Exception {
 		ConsoleUtil consoleUtil = new ConsoleUtil();
+		MemberRegistService memberRegistService = new MemberRegistService();
 		Member newMember = consoleUtil.getNewMember(sc);
 
-		MemberRegistService memberRegistService = new MemberRegistService();
-
-		boolean registSuccess = memberRegistService.registMember(newMember);
-		if (registSuccess) {
-			consoleUtil.printRegistSuccessMessage(newMember.getId());
-		} else {
-			consoleUtil.printRegistFailMessage(newMember.getId());
-		}
-
+		boolean registSuccess = memberRegistService.registMember(newMember, DB);
+		consoleUtil.printRegistMessage(newMember.getId(), registSuccess);
 	}
 }

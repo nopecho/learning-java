@@ -1,18 +1,17 @@
 package action;
 
 import java.util.Scanner;
+import util.MemberDB;
 import svc.MemberListService;
 import util.ConsoleUtil;
-import vo.Member;
 
 public class MemberListAction implements Action {
-
 	@Override
-	public void execute(Scanner scan) {
+	public void execute(Scanner sc, MemberDB DB) {
 		ConsoleUtil consoleUtil = new ConsoleUtil();
 		MemberListService memberListService = new MemberListService();
 
-		Member[] memberArray = memberListService.getMemberArray();// 배열을 가져옴
-		consoleUtil.printMemberList(memberArray);
+		boolean listSuccess = memberListService.isEmptyMember(DB);
+		consoleUtil.printMemberList(DB, listSuccess);
 	}
 }

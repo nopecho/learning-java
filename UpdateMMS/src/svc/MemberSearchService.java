@@ -1,38 +1,24 @@
 package svc;
 
-import ui.MemberUI;
+import java.util.ArrayList;
+import util.MemberDB;
 import vo.Member;
 
 public class MemberSearchService {
-	public Member searchMemberById(String searchValue) {
-		Member member = null;
-
-		for (int i = 0; i < MemberUI.memberArray.length; i++) {
-			if (MemberUI.memberArray[i].getId() == Integer.parseInt(searchValue)) {
-				member = MemberUI.memberArray[i];
-				break;
-			}
-		}
-		return member;
-	}
-
-	public Member[] searchMemberByName(String searchValue) {
-		Member[] searchMemberArray = null;
-		int count = 0;
-		Member[] tempArray = new Member[MemberUI.memberArray.length];
-
-		for (int i = 0; i < MemberUI.memberArray.length; i++) {
-			if (searchValue.contentEquals(MemberUI.memberArray[i].getName())) {
-				tempArray[count++] = MemberUI.memberArray[i];
-			}
-		}
-
-		searchMemberArray = new Member[count];
-
-		for (int i = 0; i < count; i++) {
-			searchMemberArray[i] = tempArray[i];
-		}
-
-		return searchMemberArray;
-	}
+    public Member searchMemberById(String searchValue, MemberDB DB) {
+        Member member = null;
+        if (DB.getDB().containsKey(Integer.parseInt(searchValue))) {
+            member = DB.getDB().get(Integer.parseInt(searchValue));
+        }
+        return member;
+    }
+    public ArrayList<Member> searchMemberByName(String searchValue, MemberDB DB){
+        ArrayList<Member> searchMemberList = new ArrayList<>();
+        for (Member member : DB.getDB().values()) {
+            if (member.getName().equals(searchValue)) {
+                searchMemberList.add(member);
+            }
+        }
+        return searchMemberList;
+    }
 }

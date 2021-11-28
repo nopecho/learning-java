@@ -1,24 +1,18 @@
 package action;
 
 import java.util.Scanner;
-
-import svc.MemberDeleteService;
 import util.ConsoleUtil;
+import svc.MemberDeleteService;
+import util.MemberDB;
 
 public class MemberDeleteAction implements Action {
-	ConsoleUtil consoleUtil = new ConsoleUtil();
-
 	@Override
-	public void execute(Scanner scan) throws Exception {
-		int id = consoleUtil.getId("삭제할", scan);
+	public void execute(Scanner sc, MemberDB DB) {
+		ConsoleUtil consoleUtil = new ConsoleUtil();
+		int id = consoleUtil.getId("삭제할");
 		MemberDeleteService memberDeleteService = new MemberDeleteService();
 
-		boolean deleteSuccess = memberDeleteService.deleteMember(id);
-
-		if (deleteSuccess) {
-			consoleUtil.printDeleteSuccessMessage(id);
-		} else {
-			consoleUtil.printDeleteFailMessage(id);
-		}
+		boolean deleteSuccess = memberDeleteService.deleteMember(id, DB);
+		consoleUtil.printDeleteMessage(id, deleteSuccess);
 	}
 }

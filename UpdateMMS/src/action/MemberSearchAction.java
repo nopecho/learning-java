@@ -1,28 +1,26 @@
 package action;
 
+import java.util.ArrayList;
 import java.util.Scanner;
-
-import svc.MemberSearchService;
 import util.ConsoleUtil;
+import util.MemberDB;
 import vo.Member;
-import vo.SearchDate;
+import vo.SearchData;
+import svc.MemberSearchService;
 
 public class MemberSearchAction implements Action {
 	@Override
-	public void execute(Scanner scan) {
+	public void execute(Scanner sc, MemberDB DB) {
 		ConsoleUtil consoleUtil = new ConsoleUtil();
-
-		SearchDate searchData = consoleUtil.getSearchData(scan);
 		MemberSearchService memberSearchService = new MemberSearchService();
+		SearchData searchData = consoleUtil.getSearchData(sc);
 
-		if (searchData.getSearchCondition().equals("아이디")) {	
-			Member member = memberSearchService.searchMemberById(searchData.getSearchValue());
-			consoleUtil.printSearchMember(member);
-		}
-		if (searchData.getSearchCondition().equals("이름")) {
-			Member[] memberArray = memberSearchService.searchMemberByName(searchData.getSearchValue());
-			consoleUtil.printSearchMemberArray(memberArray);
-
+		if (searchData.getSearchCondition().equals("아이디")) {
+			Member member = memberSearchService.searchMemberById(searchData.getSearchValue(), DB);
+			consoleUtil.printSearchMember(member, searchData.getSearchValue());
+		} else if (searchData.getSearchCondition().equals("이름")) {
+			ArrayList<Member> memberList = memberSearchService.searchMemberByName(searchData.getSearchValue(), DB);
+			consoleUtil.printSearchMemberList(memberList, searchData.getSearchValue());
 		}
 	}
 }
