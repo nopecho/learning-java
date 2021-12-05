@@ -10,4 +10,9 @@ public class Com {
     public String getValue() {
         return value;
     }
+
+    @Override
+    public String toString(){
+        return "COM";
+    }
 }

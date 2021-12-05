@@ -1,5 +1,7 @@
 package dao;
 
+import java.util.Scanner;
+
 public interface Dao {
-    void execute();
+    void execute(Scanner sc);
 }

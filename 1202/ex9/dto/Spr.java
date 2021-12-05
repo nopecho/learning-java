@@ -1,17 +1,18 @@
 package dto;
 
 public class Spr {
-    private final String SCISSORS = "가위";
-    private final String PAPER = "보";
-    private final String ROCK = "바위";
+    private final String[] spr = {"가위","바위","보"};
 
     public String getScissors(){
-        return SCISSORS;
+        return spr[0];
     }
     public String getPaper(){
-        return PAPER;
+        return spr[2];
     }
     public String getRock(){
-        return ROCK;
+        return spr[1];
+    }
+    public String[] getSpr(){
+        return spr;
     }
 }

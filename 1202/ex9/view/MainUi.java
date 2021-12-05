@@ -2,24 +2,35 @@ package view;
 
 import controller.Controller;
 import dao.*;
+import dto.*;
 
 import java.util.Scanner;
 
 public class MainUi {
     private final Scanner sc = new Scanner(System.in);
     private final Controller controller = new Controller();
+    public static final Spr SPR = new Spr();
+    public static User user = new User();
+    public static Com com = new Com();
     private boolean gameContinue = true;
-    private Dao dao = null;
+    private Dao dao;
 
     public void run() {
         ConsoleMsg consoleMsg = new ConsoleMsg();
         consoleMsg.printUserSettingMsg();
-        String name = sc.next();
         dao = new UserSettingDao();
-        controller.request(dao);
+        controller.request(dao,sc);
+
         while (gameContinue) {
+            dao = null;
+            consoleMsg.printUserPick(user);
             pickUi();
-            if (dao != null) controller.request(dao);
+            if(dao!=null){
+                controller.request(dao,sc);
+                consoleMsg.printComparison(user,com);
+                dao = new WinnerCheckDao();
+                controller.request(dao,sc);
+            }
         }
     }
 
@@ -36,6 +47,8 @@ public class MainUi {
                 dao = new UserPaperPickDao();
                 break;
             case 4:
+                dao = null;
+                System.out.println("게임을 종료 합니다.");
                 gameContinue = false;
                 break;
         }
