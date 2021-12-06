@@ -1,17 +1,14 @@
 package dao;
 
 import java.util.Scanner;
-
-import dto.Person;
 import svc.PersonSettingSvc;
-import view.*;
+import view.ConsoleMsg;
 
 public class PersonSettingDao implements Dao{
     @Override
-    public void response() {
+    public void response(Scanner sc, ConsoleMsg msg) {
         PersonSettingSvc settingSvc = new PersonSettingSvc();
-        Scanner sc = new Scanner(System.in);
         int num = sc.nextInt();
-        MainUi.persons = new Person[num];
+        settingSvc.setPerson(num);
     }
 }

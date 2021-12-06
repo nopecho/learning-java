@@ -11,7 +11,7 @@ public class Numbers {
         }
     }
 
-    public int[] getNumArray(){
+    public int[] getNumArray() {
         return numArray;
     }
 }

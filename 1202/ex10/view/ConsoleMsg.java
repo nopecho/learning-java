@@ -13,7 +13,7 @@ public class ConsoleMsg {
     }
 
     public void continueGameMsg(Person person){
-        System.out.print(person.getName()+": <ENTER> ");
+        System.out.print(person.getName()+" : <ENTER> ");
     }
 
     public void failMsg(){
@@ -21,12 +21,12 @@ public class ConsoleMsg {
     }
 
     public void successMsg(Person person){
-        System.out.println(person.getName()+ "님 * 성공 * ");
+        System.out.println(person.getName()+ "님  **성공** ");
     }
 
     public void printNumbers(int[] numbers){
         for(int i : numbers){
-            System.out.print(i+"\t");
+            System.out.print("\t"+i+"\t");
         }
     }
 }
