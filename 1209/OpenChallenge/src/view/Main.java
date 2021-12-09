@@ -6,29 +6,20 @@ import controller.Controller;
 import vo.Word;
 
 public class Main {
-    private final String appName;
     public static final List<Word> wordSet = new ArrayList<>();
-    private final Scanner sc = new Scanner(System.in);
     private final Controller controller = new Controller();
-    private Dao dao;
-
-    public Main(String appName){
-        this.appName=appName;
-    }
+    public static boolean game=true;
 
     public void run(){
-        Util.startMsg(appName);
+        Dao dao = new WordSettingDao();
+        controller.request(dao);
+        Util.startMsg();
         Util.countWordMsg(wordSet);
-        dao = new WordSettingDao();
-        controller.request(dao,sc);
 
-        while(true){
+        while(game){
             dao = new QuestionWordDao();
-            controller.request(dao,sc);
-            dao = new SelectWordDao();
-            controller.request(dao,sc);
-            dao = new CheckWordDao();
-            controller.request(dao,sc);
+            controller.request(dao);
+            dao = null;
         }
     }
 }

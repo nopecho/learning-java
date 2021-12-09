@@ -1,12 +1,11 @@
 package view;
 
 import vo.Word;
-
 import java.util.List;
 
 public class Util {
-    public static void startMsg(String appName) {
-        System.out.println(appName + "의 단어 테스트를 시작합니다.");
+    public static void startMsg() {
+        System.out.println("현준의 단어 테스트를 시작합니다.");
     }
 
     public static void countWordMsg(List<Word> list) {
@@ -21,8 +20,8 @@ public class Util {
         System.out.println(" ! 오답 !");
     }
 
-    public static void exitMsg(String appName) {
-        System.out.println(appName + "을 종료 합니다..ㅜㅜ");
+    public static void exitMsg() {
+        System.out.println("현준 단어 테스트를 종료 합니다..ㅜㅜ");
     }
 
     public static void insertWord(List<Word> list) {
@@ -36,5 +35,15 @@ public class Util {
         list.add(new Word("deal","거래"));
         list.add(new Word("eye","사람 눈"));
         list.add(new Word("face","얼굴"));
+    }
+
+    public static void printQuestionWord(Word word){
+        System.out.println(word.getEng()+"은 뭘까요??");
+    }
+
+    public static void printSelcetWord(Word[] words){
+        for(int i = 0; i<words.length;i++){
+            System.out.print("("+(i+1)+")"+words[i].getKor()+"\t");
+        }
     }
 }

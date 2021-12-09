@@ -1,7 +1,8 @@
 package vo;
 
 public class Word {
-    private String eng, kor;
+    private final String eng;
+    private final String kor;
 
     public Word(String eng,String kor){
         this.eng=eng;

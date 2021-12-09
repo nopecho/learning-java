@@ -1,13 +1,23 @@
 package dao;
 
 import svc.QuestionWordSvc;
-
-import java.util.Scanner;
+import view.*;
+import vo.Word;
 
 public class QuestionWordDao implements Dao{
 
     @Override
-    public void response(Scanner sc) {
-        QuestionWordSvc questionWord = new QuestionWordSvc();
+    public void response() {
+        QuestionWordSvc questionSvc = new QuestionWordSvc();
+
+        Word questionWord = questionSvc.question(Main.wordSet);
+        Util.printQuestionWord(questionWord);
+        Word selectWord = questionSvc.select(questionWord,Main.wordSet);
+
+        if(questionWord.equals(selectWord)){
+            Util.successMsg();
+        }else{
+            Util.failMsg();
+        }
     }
 }
