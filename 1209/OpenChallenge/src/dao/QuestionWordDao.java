@@ -14,7 +14,10 @@ public class QuestionWordDao implements Dao{
         Util.printQuestionWord(questionWord);
         Word selectWord = questionSvc.select(questionWord,Main.wordSet);
 
-        if(questionWord.equals(selectWord)){
+        if(selectWord==null) {
+            Util.exitMsg();
+            Main.game = false;
+        }else if(questionWord.equals(selectWord)){
             Util.successMsg();
         }else{
             Util.failMsg();

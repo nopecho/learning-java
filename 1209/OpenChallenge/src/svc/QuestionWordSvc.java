@@ -16,28 +16,20 @@ public class QuestionWordSvc {
         Word[] words = new Word[4];
         words[(int) (Math.random() * 4)] = word;
 
-        Set<Word> set = new HashSet<>();
-        while (true){
-            for (int i = 0; i < words.length; i++) {
-                if (words[i] == null ) {
-                    words[i] = list.get((int) (Math.random() * list.size()));
-                }
+        for (int i = 0; i < words.length; i++) {
+            if (words[i] == null) {
+                words[i] = list.get((int) (Math.random() * list.size()));
             }
-            Collections.addAll(set, words);
-            if(set.size() == words.length){
-                break;
-            }else{
-                words = new Word[4];
-                words[(int) (Math.random() * 4)] = word;
+            for (int j = 0; j < i; j++) { //중복 제거
+                if (words[j].equals(words[i])) {
+                    words[i] = null;
+                    i--;
+                }
             }
         }
         Util.printSelcetWord(words);
         int selct = sc.nextInt();
-        if (selct == -1) {
-            Util.exitMsg();
-            Main.game = false;
-            return null;
-        }
+        if (selct == -1) return null;
         return words[selct - 1];
     }
 }
