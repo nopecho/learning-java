@@ -20,10 +20,8 @@ public class Main {
             switch (menu) {
                 case 1:
                     Util.insert(list); break;
-
                 case 2:
                     Util.quiz(list); break;
-
                 case 3:
                     System.out.println("종료 합니다.");
                     game = false;
