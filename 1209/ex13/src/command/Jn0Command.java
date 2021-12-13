@@ -8,20 +8,20 @@ public class Jn0Command implements Command {
     @Override
     public void response(SuperCom com) {
         String commandKey = Util.sc.next();
-        int commanLine = Util.sc.nextInt();
+        int commandLine = Util.sc.nextInt();
 
         Memory memory = new Memory();
         com.setMemory(memory);
         String changeKey = Util.findMemoryKey(com, commandKey);
-        int check = Util.findMemoryValue(com,changeKey);
-        while(check!=0){
-            loopMemory(com, commanLine);
-            check = Util.findMemoryValue(com,changeKey);
+        int checkVar = Util.findMemoryValue(com,changeKey);
+        while(checkVar!=0){
+            loopMemory(com, commandLine);
+            checkVar = Util.findMemoryValue(com,changeKey);
         }
     }
 
-    private void loopMemory(SuperCom com, int num) {
-        for (int i = num; i < com.getMemory().size(); i++) {
+    private void loopMemory(SuperCom com, int commandLine) {
+        for (int i = commandLine; i < com.getMemory().size(); i++) {
             com.getMemory().get(i).update(com);
         }
     }

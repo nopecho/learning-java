@@ -30,13 +30,15 @@ public class Main {
                     command = new prtCommand(); break;
                 case "go":
                     command = new runCommand(); break;
-                case "그만" :
-                    game=false; break;
+                case "stop" :
+                    Util.exitMsg();
+                    game=false;
+                    break;
                 default :
+                    Util.sc.nextLine();
                     Util.commandErrorMsg();
-                    continue;
             }
-           controller.request(command,superCom);
+           if(command!=null) controller.request(command,superCom);
         }
     }
 }

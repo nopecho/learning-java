@@ -11,9 +11,11 @@ public class SubCommand implements Command{
         String commandValue = Util.sc.next();
 
         String changeKey = Util.findMemoryKey(com, commandKey);
-        Integer changeValue = Util.castingValue(com, commandValue);
-
-        Memory memory = new Memory("sub",changeKey,changeValue);
+        if(changeKey == null) {
+            Util.notFindKeyMsg(commandKey);
+            return;
+        }
+        Memory memory = new Memory("sub",changeKey,commandValue);
         memory.update(com);
         com.setMemory(memory);
     }

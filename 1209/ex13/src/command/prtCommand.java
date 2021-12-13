@@ -8,7 +8,13 @@ public class prtCommand implements Command{
     public void response(SuperCom com) {
         String command = Util.sc.next();
         String temp = Util.sc.next();
-        saveResult(com,command);
+
+        String checkKey = Util.findMemoryKey(com,command);
+        if(checkKey == null) {
+            Util.notFindKeyMsg(command);
+            return;
+        }
+        saveResult(com,checkKey);
     }
     public void saveResult(SuperCom com,String command){
         int result = Util.findMemoryValue(com,command);
