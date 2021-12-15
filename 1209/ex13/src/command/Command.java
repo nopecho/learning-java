@@ -3,5 +3,5 @@ package command;
 import vo.SuperCom;
 
 public interface Command {
-    void response(SuperCom com);
+    void response(SuperCom com)throws Exception;
 }

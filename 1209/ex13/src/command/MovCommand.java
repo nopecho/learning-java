@@ -6,7 +6,7 @@ import vo.SuperCom;
 
 public class MovCommand implements Command{
     @Override
-    public void response(SuperCom com) {
+    public void response(SuperCom com)throws Exception {
         String key = Util.sc.next();
         Integer value = Util.sc.nextInt();
 

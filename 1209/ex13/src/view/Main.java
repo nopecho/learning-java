@@ -38,7 +38,7 @@ public class Main {
                     Util.sc.nextLine();
                     Util.commandErrorMsg();
             }
-           if(command!=null) controller.request(command,superCom);
+            if(command!=null) controller.request(command,superCom);
         }
     }
 }

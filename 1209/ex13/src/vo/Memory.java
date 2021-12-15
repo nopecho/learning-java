@@ -5,7 +5,7 @@ import util.Util;
 import java.util.HashMap;
 
 public class Memory {
-    private final HashMap<String, Integer> memoryAddr = new HashMap<>();
+    private HashMap<String, Integer> memoryAddr = new HashMap<>();
     private String memoryName,memoryKey,memoryValue;
 
     public Memory() {

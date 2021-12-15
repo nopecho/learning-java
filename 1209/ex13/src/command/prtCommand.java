@@ -10,14 +10,10 @@ public class prtCommand implements Command{
         String temp = Util.sc.next();
 
         String checkKey = Util.findMemoryKey(com,command);
-        if(checkKey == null) {
-            Util.notFindKeyMsg(command);
-            return;
-        }
         saveResult(com,checkKey);
     }
     public void saveResult(SuperCom com,String command){
-        int result = Util.findMemoryValue(com,command);
+        int result = Util.getMemoryValue(com,command);
         com.setResult(result);
         com.setResultOfName(command);
     }
