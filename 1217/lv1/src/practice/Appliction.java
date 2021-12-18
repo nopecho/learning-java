@@ -95,10 +95,4 @@ public class Appliction {
         System.out.println(minResult);
         System.out.println("****************************************");
 
-        List<String> words = Arrays.asList("TONY", "a", "hULK", "B", "america", "X", "nebula", "Korea");
-        words.stream()
-                .filter(s -> s.length()>=2)
-                .map(s -> s.toUpperCase().charAt(0))
-                .forEach(System.out::print);
-    }
 }
