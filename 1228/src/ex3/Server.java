@@ -5,12 +5,17 @@ import java.io.*;
 import java.util.*;
 
 public class Server {
+
+    public static Thread getThread(ServerSocket socket){
+        return new Thread(new socketRunnable(socket));
+    }
+
     public static void main(String[] args) {
         ServerSocket serverSocket;
         try {
             serverSocket = new ServerSocket(9999);
             System.out.println("연결 준비중..");
-            Thread th = new Thread(new socketRunnable(serverSocket));
+            Thread th = getThread(serverSocket);
             th.start();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -51,6 +56,7 @@ class socketRunnable implements Runnable {
     socketRunnable(ServerSocket serverSocket) {
         this.serverSocket = serverSocket;
     }
+
     @Override
     public void run() {
         try {
@@ -65,16 +71,16 @@ class socketRunnable implements Runnable {
                     break;
                 }
                 String result = Server.clac(inputMsg);
-                System.out.println(inputMsg+" = "+result+"\n");
-                out.write(result+"\n");
+                System.out.println(inputMsg + " = " + result + "\n");
+                out.write(result + "\n");
                 out.flush();
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
         } finally {
-            try{
-                if(socket != null) socket.close();
-            }catch (IOException e){
+            try {
+                if (socket != null) socket.close();
+            } catch (IOException e) {
                 System.out.println("연결 오류 !");
             }
         }
