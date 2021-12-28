@@ -17,12 +17,6 @@ public class Server {
             th.start();
         } catch (IOException e) {
             System.out.println(e.getMessage());
-        } finally {
-            try {
-                if (socket != null) socket.close();
-            } catch (IOException e) {
-                System.out.println("연결 오류");
-            }
         }
     }
 
