@@ -23,7 +23,7 @@ public class CalcClientEx {
                     out.flush();
                     break;
                 }
-                out.write(outputMsg);
+                out.write(outputMsg+"\n");
                 out.flush();
                 String inputMsg = in.readLine();
                 System.out.println("계산 결과 : "+inputMsg);
