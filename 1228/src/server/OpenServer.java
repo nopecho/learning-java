@@ -6,8 +6,8 @@ import java.util.*;
 
 public class OpenServer {
     public static void main(String[] args) {
-        ServerSocket listener = null;
-        Socket socket = null;
+        ServerSocket listener;
+        Socket socket;
         try{
             listener = new ServerSocket(9999);
             System.out.println("연결 준비중...");
@@ -37,12 +37,18 @@ class inputThread extends Thread{
                 if(inputMsg.equalsIgnoreCase("bye")){
                     System.out.println("<연결 종료>");
                     Thread.currentThread().interrupt();
-                    return;
+                    break;
                 }
                 System.out.println("클라이언트 : "+inputMsg);
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+            try{
+                if(socket != null) socket.close();
+            }catch (IOException e){
+                System.out.println("오류");
+            }
         }
     }
 }
@@ -66,6 +72,13 @@ class outputThread extends Thread{
             }
         } catch (IOException e) {
             System.out.println(e.getMessage());
+        } finally {
+            sc.close();
+            try{
+                if(socket != null) socket.close();
+            }catch (IOException e){
+                System.out.println("오류");
+            }
         }
     }
 }
