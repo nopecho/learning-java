@@ -7,13 +7,10 @@ import java.util.*;
 public class Server {
     public static void main(String[] args) {
         ServerSocket serverSocket;
-        Socket socket = null;
         try {
             serverSocket = new ServerSocket(9999);
             System.out.println("연결 준비중..");
-            socket = serverSocket.accept();
-            System.out.println(socket.getInetAddress() + " 클라이언트 접속\n연결 성공");
-            Thread th = new Thread(new socketRunnable(socket));
+            Thread th = new Thread(new socketRunnable(serverSocket));
             th.start();
         } catch (IOException e) {
             System.out.println(e.getMessage());
@@ -48,14 +45,17 @@ public class Server {
 }
 
 class socketRunnable implements Runnable {
-    private final Socket socket;
+    private final ServerSocket serverSocket;
+    private Socket socket;
 
-    socketRunnable(Socket socket) {
-        this.socket = socket;
+    socketRunnable(ServerSocket serverSocket) {
+        this.serverSocket = serverSocket;
     }
     @Override
     public void run() {
         try {
+            socket = serverSocket.accept();
+            System.out.println(socket.getInetAddress() + " 클라이언트 접속\n연결 성공");
             BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             while (true) {
@@ -66,7 +66,7 @@ class socketRunnable implements Runnable {
                 }
                 String result = Server.clac(inputMsg);
                 System.out.println(inputMsg+" = "+result+"\n");
-                out.write(result);
+                out.write(result+"\n");
                 out.flush();
             }
         } catch (IOException e) {
