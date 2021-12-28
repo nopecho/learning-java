@@ -64,6 +64,7 @@ class outputThread extends Thread{
         try {
             BufferedWriter out = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             while (true){
+                sc.nextLine();
                 if(Thread.currentThread().isInterrupted()) return;
                 System.out.print("보내기 >>");
                 String outMsg = sc.nextLine();
